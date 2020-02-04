@@ -1,0 +1,17 @@
+<resources>
+    <string name="app_name">MyApplication</string>
+
+    <!--Network Exceptions-->
+    <string name="network_error">Unexpected network error occurred. Please try again.</string>
+    <string name="unreachable_server">Servers are unreachable. Please try again later.</string>
+    <string name="unreachable_server_internet_error">Cannot reach server. Please check your internet connection.</string>
+    <string name="something_went_wrong">Something went wrong</string>
+
+    <!--Screen names-->
+    <string name="main_screen">Weather App</string>
+    <string name="weather_forecast">Weather Forecast</string>
+    <string name="current_weather">Current Weather</string>
+
+    <!--Notifications-->
+    <string name="weather_city_error">Cannot fetch current weather for: %s</string>
+</resources>
