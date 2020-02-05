@@ -29,11 +29,11 @@
     <fragment
         android:id="@+id/currentWeatherFragment"
         android:name="com.example.myapplication.ui.weather.current.CurrentWeatherFragment"
-        android:label="current_weather_fragment"
+        android:label="@string/current_weather"
         tools:layout="@layout/current_weather_fragment" />
     <fragment
         android:id="@+id/forecastWeatherFragment"
         android:name="com.example.myapplication.ui.weather.forecast.ForecastWeatherFragment"
-        android:label="forecast_weather_fragment"
+        android:label="@string/weather_forecast"
         tools:layout="@layout/forecast_weather_fragment" />
 </navigation>

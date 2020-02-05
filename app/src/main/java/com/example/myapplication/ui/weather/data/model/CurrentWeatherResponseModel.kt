@@ -1,5 +1,7 @@
 package com.example.myapplication.ui.weather.data.model
 
+import com.google.gson.annotations.SerializedName
+
 /**
  * Created by Gulshan Ahluwalia on 2020-02-04.
  */
@@ -30,8 +32,8 @@ data class Main (
     val temp: Double? = null,
     val pressure: Long? = null,
     val humidity: Long? = null,
-    val tempMin: Double? = null,
-    val tempMax: Double? = null
+    @SerializedName("temp_min") val tempMin: Double? = null,
+    @SerializedName("temp_max") val tempMax: Double? = null
 )
 
 data class Weather (

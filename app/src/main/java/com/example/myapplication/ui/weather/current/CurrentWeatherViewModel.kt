@@ -1,10 +1,14 @@
 package com.example.myapplication.ui.weather.current
 
 import android.app.Application
-import androidx.lifecycle.*
+import androidx.lifecycle.AndroidViewModel
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.viewModelScope
 import com.example.myapplication.R
 import com.example.myapplication.network.ErrorResponseModel
 import com.example.myapplication.ui.weather.data.WeatherRepository
+import com.example.myapplication.ui.weather.data.model.CurrentWeatherResponseModel
 import kotlinx.coroutines.*
 
 class CurrentWeatherViewModel(
@@ -16,17 +20,17 @@ class CurrentWeatherViewModel(
     val toastMessage: LiveData<String>
         get() = _toastMessage
 
-    private val _userList = MutableLiveData<ArrayList<Void>>()
+    private val _cityWeatherList = MutableLiveData<List<CurrentWeatherModel>>()
 
-    val userList: LiveData<ArrayList<Void>>
-        get() = _userList
+    val cityWeatherList: LiveData<List<CurrentWeatherModel>>
+        get() = _cityWeatherList
 
     private val _loadingState = MutableLiveData<Boolean>(false)
 
     val isLoading: LiveData<Boolean>
         get() = _loadingState
 
-    fun fetchWeatherForecast(cityName: Array<String> = arrayOf("london", "jalandhar", "New york")) {
+    fun fetchWeatherForecast(cityName: List<String>) {
         launchDataLoad { asyncScope ->
             asyncScope.run {
                 val exceptionCities = ArrayList<String>()
@@ -40,13 +44,26 @@ class CurrentWeatherViewModel(
                         }
                     }
                 }
-                val a = deferreds.awaitAll().filterNotNull()
+                _cityWeatherList.value = transformModel(deferreds.awaitAll().filterNotNull())
                 if(exceptionCities.size>0) {
                     throwExceptionForWeatherAPI(exceptionCities)
                 }
             }
 
         }
+    }
+
+    private fun transformModel(responseList: List<CurrentWeatherResponseModel>): List<CurrentWeatherModel> {
+        return responseList.map {
+            CurrentWeatherModel(
+                cityId = it.id ?: 0,
+                cityName = it.name,
+                maxTemp = it.main?.tempMax?.toString(),
+                minTemp = it.main?.tempMin?.toString(),
+                windSpeed = it.wind?.speed?.toString(),
+                description = it.weather?.getOrNull(0)?.description
+            )
+        }.distinctBy { it.cityId }
     }
 
     private fun throwExceptionForWeatherAPI(exceptionCities: ArrayList<String>) {
@@ -81,5 +98,16 @@ class CurrentWeatherViewModel(
             }
         }
 
+    }
+
+    fun fetchWeatherForecastForCities(citiesCSV: String) {
+        val cities = citiesCSV.split(",").map { it.trim() }.distinct()
+        if (cities.size < 3) {
+            throw IllegalArgumentException(context.getString(R.string.cities_min_error))
+        } else if (cities.size > 7) {
+            throw IllegalArgumentException(context.getString(R.string.cities_max_error))
+        } else {
+            fetchWeatherForecast(cities)
+        }
     }
 }

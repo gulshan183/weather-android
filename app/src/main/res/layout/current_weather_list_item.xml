@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="item"
+            type="com.example.myapplication.ui.weather.current.CurrentWeatherModel" />
+
+    </data>
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:cardElevation="2dp"
+        app:cardUseCompatPadding="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="@dimen/cardview_padding">
+
+            <TextView
+                visible="@{item.cityName!=null}"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@{item.cityName}"
+                tools:text="London" />
+
+            <TextView
+                visible="@{item.description!=null}"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@{item.description}"
+                tools:text="Clear Sky" />
+
+            <TextView
+                visible="@{item.maxTemp!=null}"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@{item.maxTemp}"
+                tools:text="14" />
+
+            <TextView
+                visible="@{item.minTemp!=null}"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@{item.minTemp}"
+                tools:text="10" />
+
+            <TextView
+                visible="@{item.windSpeed!=null}"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@{item.windSpeed}"
+                tools:text="2.4" />
+
+
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+</layout>

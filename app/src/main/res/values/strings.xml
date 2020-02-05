@@ -14,4 +14,8 @@
 
     <!--Notifications-->
     <string name="weather_city_error">Cannot fetch current weather for: %s</string>
+    <string name="search">Search</string>
+    <string name="city_search_hint_text">City names (CSV)</string>
+    <string name="cities_min_error">Please enter at least three unique cities in CSV</string>
+    <string name="cities_max_error">You can enter at most seven cities</string>
 </resources>
