@@ -13,9 +13,16 @@
     <string name="current_weather">Current Weather</string>
 
     <!--Notifications-->
-    <string name="weather_city_error">Cannot fetch current weather for: %s</string>
+    <string name="weather_city_error">Cannot fetch current weather for %s</string>
     <string name="search">Search</string>
     <string name="city_search_hint_text">City names (CSV)</string>
     <string name="cities_min_error">Please enter at least three unique cities in CSV</string>
     <string name="cities_max_error">You can enter at most seven cities</string>
+    <string name="weather_city_no_internet">No internet. Cannot found results for %s</string>
+    <string name="weather_city_not_found">%s not found. Please enter valid city name.</string>
+    <string name="playservice_error">Play services not found. Cannot continue.</string>
+    <string name="device_error_location">Device error. Cannot continue.</string>
+    <string name="location_permission_required">Current location access is required to fetch weather conditions.</string>
+    <string name="today">Today</string>
+    <string name="tomorrow">Tomorrow</string>
 </resources>

@@ -22,39 +22,20 @@ data class City (
 
 data class ListElement (
     val dt: Long? = null,
-    val main: MainClass? = null,
+    val main: Main? = null,
     val weather: List<Weather>? = null,
     val clouds: Clouds? = null,
     val wind: Wind? = null,
-    val sys: Sys? = null,
     val dtTxt: String? = null,
     val rain: Rain? = null,
     val snow: Rain? = null
 )
 
-data class MainClass (
-    val temp: Double? = null,
-    val tempMin: Double? = null,
-    val tempMax: Double? = null,
-    val pressure: Double? = null,
-    val seaLevel: Double? = null,
-    val grndLevel: Double? = null,
-    val humidity: Long? = null,
-    val tempKf: Double? = null
-)
 
 data class Rain (
     val the3H: Double? = null
 )
 
-data class Sys (
-    val pod: Pod? = null
-)
-
-enum class Pod {
-    D,
-    N
-}
 
 enum class Description {
     BrokenClouds,

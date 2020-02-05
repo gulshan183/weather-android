@@ -7,6 +7,8 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.example.myapplication.R
 import com.example.myapplication.network.ErrorResponseModel
+import com.example.myapplication.network.NOT_FOUND
+import com.example.myapplication.network.NO_INTERNET
 import com.example.myapplication.ui.weather.data.WeatherRepository
 import com.example.myapplication.ui.weather.data.model.CurrentWeatherResponseModel
 import kotlinx.coroutines.*
@@ -30,16 +32,16 @@ class CurrentWeatherViewModel(
     val isLoading: LiveData<Boolean>
         get() = _loadingState
 
-    fun fetchWeatherForecast(cityName: List<String>) {
+    private fun fetchWeatherForecast(cityName: List<String>) {
         launchDataLoad { asyncScope ->
             asyncScope.run {
-                val exceptionCities = ArrayList<String>()
+                val exceptionCities = ArrayList<ErrorModel>()
                 val deferreds = cityName.map {
                     async {
                         try {
                             repository.fetchCurrentWeather(it)
                         } catch (e: WeatherRepository.RepositoryException.CurrentWeatherException) {
-                            exceptionCities.add(it)
+                            exceptionCities.add(ErrorModel(it, e.errorResponseModel))
                             null
                         }
                     }
@@ -66,17 +68,39 @@ class CurrentWeatherViewModel(
         }.distinctBy { it.cityId }
     }
 
-    private fun throwExceptionForWeatherAPI(exceptionCities: ArrayList<String>) {
-        throw WeatherRepository.RepositoryException.GeneralException(
-            ErrorResponseModel(
-                message =
-                context.getString(
-                    R.string.weather_city_error,
-                    exceptionCities.reduceIndexed { pos, acc, s ->
-                        if (pos == exceptionCities.size - 1) "$acc and $s" else "$acc, $s"
-                    })
+    private fun throwExceptionForWeatherAPI(exceptionCities: ArrayList<ErrorModel>) {
+        val notFoundList = ArrayList<String>()
+        val noInternetList = ArrayList<String>()
+        val generalList = ArrayList<String>()
+        exceptionCities.forEach {
+            when (it.errorResponseModel.errorCode) {
+                NO_INTERNET -> noInternetList.add(it.city)
+                NOT_FOUND -> notFoundList.add(it.city)
+                else -> generalList.add(it.city)
+            }
+        }
+        val errorString = getErrorMessage(notFoundList, R.string.weather_city_not_found) +
+                "\n" + getErrorMessage(noInternetList, R.string.weather_city_no_internet) +
+                "\n" + getErrorMessage(generalList, R.string.weather_city_error)
+
+        if (errorString.isNotEmpty()) {
+            throw WeatherRepository.RepositoryException.GeneralException(
+                ErrorResponseModel(
+                    message =
+                    errorString.trim()
+                )
             )
-        )
+        }
+    }
+
+    private fun getErrorMessage(errorCities: List<String>, msgResId: Int): String {
+        return if (errorCities.isNotEmpty()) {
+            context.getString(
+                msgResId,
+                errorCities.reduceIndexed { pos, acc, s ->
+                    if (pos == errorCities.size - 1) "$acc and $s" else "$acc, $s"
+                })
+        } else ""
     }
 
     private fun launchDataLoad(
@@ -101,7 +125,7 @@ class CurrentWeatherViewModel(
     }
 
     fun fetchWeatherForecastForCities(citiesCSV: String) {
-        val cities = citiesCSV.split(",").map { it.trim() }.distinct()
+        val cities = citiesCSV.split(",").filter { it.trim().isNotEmpty() }.distinct()
         if (cities.size < 3) {
             throw IllegalArgumentException(context.getString(R.string.cities_min_error))
         } else if (cities.size > 7) {
@@ -110,4 +134,8 @@ class CurrentWeatherViewModel(
             fetchWeatherForecast(cities)
         }
     }
+
+    data class ErrorModel(val city: String, val errorResponseModel: ErrorResponseModel)
 }
+
+

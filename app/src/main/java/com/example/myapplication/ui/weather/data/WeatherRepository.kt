@@ -1,9 +1,11 @@
 package com.example.myapplication.ui.weather.data
 
-import com.example.myapplication.network.*
+import com.example.myapplication.network.ErrorResponseModel
+import com.example.myapplication.network.NetworkException
+import com.example.myapplication.network.WeatherNetworkService
+import com.example.myapplication.network.await
 import com.example.myapplication.ui.weather.data.model.CurrentWeatherResponseModel
 import com.example.myapplication.ui.weather.data.model.WeatherForecastResponseModel
-import kotlinx.android.synthetic.main.main_fragment.view.*
 import retrofit2.Call
 import retrofit2.Retrofit
 
@@ -23,9 +25,12 @@ class WeatherRepository(val retrofit: Retrofit) {
     }
 
     @Throws(RepositoryException.WeatherForecastException::class)
-    suspend fun fetchWeatherForecast(cityName: String): WeatherForecastResponseModel? {
+    suspend fun fetchWeatherForecast(
+        latitude: Double,
+        longitude: Double
+    ): WeatherForecastResponseModel? {
         return launchAPI({
-            return@launchAPI retrofitService.getForecastWeather(cityName)
+            return@launchAPI retrofitService.getForecastWeather(latitude, longitude)
         }, { e -> RepositoryException.CurrentWeatherException(e.errorResponseModel) })
     }
 

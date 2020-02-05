@@ -15,5 +15,5 @@ interface WeatherNetworkService {
     fun getCurrentWeather(@Query("q") cityName:String):Call<CurrentWeatherResponseModel>
 
     @GET("forecast")
-    fun getForecastWeather(@Query("q") cityName:String):Call<WeatherForecastResponseModel>
+    fun getForecastWeather(@Query("lat") lat: Double, @Query("lon") lon: Double): Call<WeatherForecastResponseModel>
 }

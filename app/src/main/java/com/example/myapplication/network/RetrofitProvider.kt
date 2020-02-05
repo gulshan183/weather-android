@@ -27,6 +27,7 @@ object RetrofitProvider {
                 val originalHttpUrl: HttpUrl = original.url
                 val url = originalHttpUrl.newBuilder()
                     .addQueryParameter("appid", "aa4c44684e18c81cf809b7e07c7bd989")
+                    .addQueryParameter("units", "metric")
                     .build()
                 val requestBuilder: Request.Builder = original.newBuilder()
                     .url(url)

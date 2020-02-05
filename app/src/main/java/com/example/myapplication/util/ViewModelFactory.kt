@@ -1,7 +1,6 @@
 package com.example.myapplication.util
 
 import android.app.Application
-import android.content.Context
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.example.myapplication.ui.weather.current.CurrentWeatherViewModel
@@ -23,7 +22,7 @@ class ViewModelFactory constructor(
                 isAssignableFrom(CurrentWeatherViewModel::class.java) ->
                     CurrentWeatherViewModel(context,weatherRepository)
                 isAssignableFrom(ForecastWeatherViewModel::class.java) ->
-                    ForecastWeatherViewModel(weatherRepository)
+                    ForecastWeatherViewModel(weatherRepository, context)
                 else ->
                     throw IllegalArgumentException("Unknown ViewModel class: ${modelClass.name}")
             }
