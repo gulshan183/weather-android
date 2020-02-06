@@ -37,7 +37,7 @@ class DaysForecastAdapter : RecyclerView.Adapter<DaysForecastAdapter.ViewHolder>
     inner class ViewHolder(private val binding: DaysForecastListItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(item: ForecastWeatherModel) {
-            binding.list.apply {
+            binding.hoursList.apply {
                 setHasFixedSize(true)
                 layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
                 adapter = HoursForecastAdapter(item.weatherHours ?: emptyList())

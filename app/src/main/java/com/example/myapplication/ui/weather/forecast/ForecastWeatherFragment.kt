@@ -71,6 +71,10 @@ class ForecastWeatherFragment : PermissionAwareFragment() {
             layoutManager = LinearLayoutManager(context)
             adapter = DaysForecastAdapter()
         }
+
+        mBinding.ivRetry.setOnClickListener {
+            observerCurrentLocation()
+        }
     }
 
     override fun onStart() {
@@ -80,11 +84,6 @@ class ForecastWeatherFragment : PermissionAwareFragment() {
 
     private fun initObservers() {
         viewModel.run {
-            toastMessage.observe(viewLifecycleOwner, Observer {
-                if(it!=null){
-                    Toast.makeText(requireContext(),getString(it),Toast.LENGTH_LONG).show()
-                }
-            })
             city.observe(viewLifecycleOwner, Observer {
                 if (it != null) {
                     (activity as? AppCompatActivity?)?.supportActionBar?.title = it

@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">MyApplication</string>
+    <string name="app_name">Weather App</string>
 
     <!--Network Exceptions-->
     <string name="network_error">Unexpected network error occurred. Please try again.</string>
@@ -8,7 +8,7 @@
     <string name="something_went_wrong">Something went wrong</string>
 
     <!--Screen names-->
-    <string name="main_screen">Weather App</string>
+    <string name="main_screen">@string/app_name</string>
     <string name="weather_forecast">Weather Forecast</string>
     <string name="current_weather">Current Weather</string>
 
@@ -23,6 +23,11 @@
     <string name="playservice_error">Play services not found. Cannot continue.</string>
     <string name="device_error_location">Device error. Cannot continue.</string>
     <string name="location_permission_required">Current location access is required to fetch weather conditions.</string>
+    <string name="retry">Retry</string>
+    <string name="no_data_found">No data found</string>
+
+    <!--Date and time-->
     <string name="today">Today</string>
     <string name="tomorrow">Tomorrow</string>
+
 </resources>

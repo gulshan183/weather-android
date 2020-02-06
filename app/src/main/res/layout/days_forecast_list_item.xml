@@ -30,7 +30,7 @@
                 tools:text="Today" />
 
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/list"
+                android:id="@+id/hours_list"
                 android:name="com.example.myapplication.ui.weather.forecast.ForecastWeatherFragment"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

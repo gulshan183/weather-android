@@ -41,7 +41,10 @@ class RetrofitCallback<T>(val continuation: Continuation<T>): Callback<T> {
             } ?: onFailure(message="Something went wrong",msgResId = R.string.something_went_wrong)
 
             401 -> onFailure(message="Invalid API key",msgResId = R.string.something_went_wrong)
-            404 -> onFailure(message = "Resource not found", errorCode = response.code().toString())
+            404 -> onFailure(
+                message = "Resource not found", errorCode = response.code().toString(),
+                msgResId = R.string.no_data_found
+            )
             else -> onFailure(message="Something went wrong",msgResId = R.string.something_went_wrong)
         }
     }

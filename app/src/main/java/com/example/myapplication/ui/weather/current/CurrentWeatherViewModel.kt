@@ -9,6 +9,7 @@ import com.example.myapplication.R
 import com.example.myapplication.network.ErrorResponseModel
 import com.example.myapplication.network.NOT_FOUND
 import com.example.myapplication.network.NO_INTERNET
+import com.example.myapplication.ui.weather.data.NetworkWeatherRepository
 import com.example.myapplication.ui.weather.data.WeatherRepository
 import com.example.myapplication.ui.weather.data.model.CurrentWeatherResponseModel
 import kotlinx.coroutines.*
@@ -40,7 +41,7 @@ class CurrentWeatherViewModel(
                     async {
                         try {
                             repository.fetchCurrentWeather(it)
-                        } catch (e: WeatherRepository.RepositoryException.CurrentWeatherException) {
+                        } catch (e: NetworkWeatherRepository.RepositoryException.CurrentWeatherException) {
                             exceptionCities.add(ErrorModel(it, e.errorResponseModel))
                             null
                         }
@@ -84,7 +85,7 @@ class CurrentWeatherViewModel(
                 "\n" + getErrorMessage(generalList, R.string.weather_city_error)
 
         if (errorString.isNotEmpty()) {
-            throw WeatherRepository.RepositoryException.GeneralException(
+            throw NetworkWeatherRepository.RepositoryException.GeneralException(
                 ErrorResponseModel(
                     message =
                     errorString.trim()
@@ -111,7 +112,7 @@ class CurrentWeatherViewModel(
         return viewModelScope.launch {
             try {
                 block(this)
-            } catch (e: WeatherRepository.RepositoryException) {
+            } catch (e: NetworkWeatherRepository.RepositoryException) {
                 _toastMessage.value = if (e.errorResponseModel.msgRes != null) {
                     context.getString(e.errorResponseModel.msgRes)
                 } else {
@@ -124,6 +125,7 @@ class CurrentWeatherViewModel(
 
     }
 
+    @Throws(java.lang.IllegalArgumentException::class)
     fun fetchWeatherForecastForCities(citiesCSV: String) {
         val cities = citiesCSV.split(",").filter { it.trim().isNotEmpty() }.distinct()
         if (cities.size < 3) {

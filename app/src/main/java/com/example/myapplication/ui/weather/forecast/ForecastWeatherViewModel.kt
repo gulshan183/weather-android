@@ -6,6 +6,8 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
+import com.example.myapplication.R
+import com.example.myapplication.ui.weather.data.NetworkWeatherRepository
 import com.example.myapplication.ui.weather.data.WeatherRepository
 import com.example.myapplication.ui.weather.data.model.ListElement
 import com.example.myapplication.ui.weather.data.model.WeatherForecastResponseModel
@@ -19,10 +21,10 @@ class ForecastWeatherViewModel(
     private val context: Application
 ) : AndroidViewModel(context) {
 
-    private val _toastMessage = MutableLiveData<Int>()
+    private val _textMessage = MutableLiveData<String>()
 
-    val toastMessage: LiveData<Int>
-        get() = _toastMessage
+    val textNotify: LiveData<String>
+        get() = _textMessage
 
     private val _forecastList = MutableLiveData<List<ForecastWeatherModel>>()
 
@@ -41,12 +43,17 @@ class ForecastWeatherViewModel(
 
     fun fetchWeatherForecast(location: Location) {
         launchDataLoad{
-            _forecastList.value = transformModel(
+            val list = transformModel(
                 repository.fetchWeatherForecast(
                     location.latitude,
                     location.longitude
                 )
             )
+            _forecastList.value = list
+            if (list.isEmpty()) {
+                _textMessage.value = context.getString(R.string.no_data_found)
+            }
+
         }
     }
 
@@ -85,8 +92,10 @@ class ForecastWeatherViewModel(
         return viewModelScope.launch {
             try {
                 block()
-            } catch (e: WeatherRepository.RepositoryException) {
-                _toastMessage.value = e.errorResponseModel.msgRes
+            } catch (e: NetworkWeatherRepository.RepositoryException) {
+                _textMessage.value = if (e.errorResponseModel.msgRes != null) {
+                    context.getString(e.errorResponseModel.msgRes)
+                } else null
             } finally {
                 loadingLiveData.value = false
             }
