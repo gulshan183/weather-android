@@ -8,11 +8,14 @@ import com.example.myapplication.ui.weather.data.model.CurrentWeatherResponseMod
 import com.example.myapplication.ui.weather.data.model.WeatherForecastResponseModel
 import retrofit2.Call
 import retrofit2.Retrofit
+import javax.inject.Inject
 
 /**
  * Created by Gulshan Ahluwalia on 2020-02-04.
  */
-class NetworkWeatherRepository(val retrofit: Retrofit) : WeatherRepository {
+
+class NetworkWeatherRepository
+@Inject constructor(private val retrofit: Retrofit) : WeatherRepository {
     private val retrofitService: WeatherNetworkService by lazy {
         retrofit.create(WeatherNetworkService::class.java)
     }

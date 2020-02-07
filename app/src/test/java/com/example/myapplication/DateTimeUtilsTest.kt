@@ -22,7 +22,7 @@ class DateTimeUtilsTest {
 
     @Before
     fun setup() {
-        context = ApplicationProvider.getApplicationContext()
+        context = ApplicationProvider.getApplicationContext<MyApplication>()
     }
 
     @Test

@@ -10,12 +10,10 @@ import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.rule.GrantPermissionRule
 import com.example.myapplication.R
-import com.example.myapplication.ui.weather.data.FakeWeatherRepository
 import com.example.myapplication.ui.weather.forecast.DaysForecastAdapter
 import com.example.myapplication.ui.weather.forecast.ForecastWeatherFragment
 import com.example.myapplication.util.DataBindingIdlingResource
 import com.example.myapplication.util.RecyclerViewItemCountAssertion
-import com.example.myapplication.util.ServiceLocator
 import com.example.myapplication.util.monitorFragment
 import org.hamcrest.Matchers.allOf
 import org.junit.After
@@ -49,10 +47,6 @@ class ForecastWeatherFragmentTest {
         IdlingRegistry.getInstance().unregister(dataBindingIdlingResource)
     }
 
-    @Before
-    fun initRepository() {
-        ServiceLocator.repository = FakeWeatherRepository()
-    }
 
     @Test
     fun dataVisible_today() {

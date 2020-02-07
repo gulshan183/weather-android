@@ -11,10 +11,8 @@ import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.filters.LargeTest
 import androidx.test.platform.app.InstrumentationRegistry
 import com.example.myapplication.ui.main.activity.MainActivity
-import com.example.myapplication.ui.weather.data.FakeWeatherRepository
 import com.example.myapplication.util.DataBindingIdlingResource
 import com.example.myapplication.util.EspressoIdlingResource
-import com.example.myapplication.util.ServiceLocator
 import com.example.myapplication.util.monitorActivity
 import org.junit.After
 import org.junit.Before
@@ -32,10 +30,6 @@ class AppNavigationTest {
         InstrumentationRegistry.getInstrumentation().targetContext
     }
 
-    @Before
-    fun initRepository() {
-        ServiceLocator.repository = FakeWeatherRepository()
-    }
 
     private val dataBindingIdlingResource = DataBindingIdlingResource()
 

@@ -1,21 +1,13 @@
 package com.example.myapplication.ui.main.fragment
 
-import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.viewModels
-import androidx.lifecycle.ViewModel
+import androidx.fragment.app.Fragment
 import androidx.navigation.Navigation
 import com.example.myapplication.R
-import com.example.myapplication.network.RetrofitProvider
-import com.example.myapplication.network.WeatherNetworkService
 import kotlinx.android.synthetic.main.main_fragment.*
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
 
 class MainFragment : Fragment() {
 

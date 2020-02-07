@@ -9,9 +9,7 @@ import androidx.test.espresso.matcher.ViewMatchers.withText
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.platform.app.InstrumentationRegistry
 import com.example.myapplication.R
-import com.example.myapplication.ui.weather.data.FakeWeatherRepository
 import com.example.myapplication.util.DataBindingIdlingResource
-import com.example.myapplication.util.ServiceLocator
 import com.example.myapplication.util.monitorFragment
 import org.hamcrest.CoreMatchers.containsString
 import org.junit.After
@@ -41,10 +39,6 @@ class MainFragmentTest {
         IdlingRegistry.getInstance().unregister(dataBindingIdlingResource)
     }
 
-    @Before
-    fun initRepository() {
-        ServiceLocator.repository = FakeWeatherRepository()
-    }
 
     @Test
     fun mainMenu_visible() {

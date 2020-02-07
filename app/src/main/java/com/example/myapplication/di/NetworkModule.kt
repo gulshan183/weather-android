@@ -1,18 +1,24 @@
-package com.example.myapplication.network
+package com.example.myapplication.di
 
+import dagger.Module
+import dagger.Provides
 import okhttp3.*
 import okhttp3.logging.HttpLoggingInterceptor
+import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import java.io.IOException
-
+import javax.inject.Singleton
 
 /**
- * Created by Gulshan Ahluwalia on 2020-02-03.
+ * Created by Gulshan Ahluwalia on 2020-02-07.
  */
-object RetrofitProvider {
-    //TODO url to be flavor based
-    val retrofitInstance:retrofit2.Retrofit by lazy {
-        retrofit2.Retrofit.Builder()
+@Module
+class NetworkModule {
+
+    @Singleton
+    @Provides
+    fun provideRetrofitService(): Retrofit {
+        return Retrofit.Builder()
             .baseUrl("https://api.openweathermap.org/data/2.5/")
             .addConverterFactory(GsonConverterFactory.create())
             .client(getOkHTTPClient())

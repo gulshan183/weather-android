@@ -1,6 +1,7 @@
 package com.example.myapplication.ui.weather.forecast
 
 import android.app.Activity
+import android.content.Context
 import android.content.Intent
 import android.location.Location
 import android.os.Bundle
@@ -15,7 +16,9 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.myapplication.R
 import com.example.myapplication.databinding.ForecastWeatherFragmentBinding
 import com.example.myapplication.ui.util.PermissionAwareFragment
+import com.example.myapplication.ui.weather.data.WeatherRepository
 import com.example.myapplication.util.*
+import javax.inject.Inject
 
 
 class ForecastWeatherFragment : PermissionAwareFragment() {
@@ -23,6 +26,9 @@ class ForecastWeatherFragment : PermissionAwareFragment() {
     private lateinit var viewModel: ForecastWeatherViewModel
     private lateinit var locationProvider: LocationProvider
     private lateinit var mBinding: ForecastWeatherFragmentBinding
+
+    @Inject
+    lateinit var weatherRepository: WeatherRepository
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -56,7 +62,11 @@ class ForecastWeatherFragment : PermissionAwareFragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        viewModel = obtainViewModel(ForecastWeatherViewModel::class.java,requireActivity().application)
+        viewModel = obtainViewModel(
+            ForecastWeatherViewModel::class.java,
+            requireActivity().application,
+            weatherRepository
+        )
         mBinding.viewModel = viewModel
         initObservers()
         initView()
@@ -103,5 +113,9 @@ class ForecastWeatherFragment : PermissionAwareFragment() {
         }
     }
 
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        requireActivity().getAppComponent()?.inject(this)
+    }
 
 }

@@ -1,5 +1,6 @@
 package com.example.myapplication.ui.weather.current
 
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -9,13 +10,20 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.myapplication.databinding.CurrentWeatherFragmentBinding
+import com.example.myapplication.ui.weather.data.WeatherRepository
+import com.example.myapplication.util.getAppComponent
 import com.example.myapplication.util.obtainViewModel
 import com.example.myapplication.util.onSubmit
+import javax.inject.Inject
 
 class CurrentWeatherFragment : Fragment() {
 
     private lateinit var viewModel: CurrentWeatherViewModel
     private lateinit var mBinding: CurrentWeatherFragmentBinding
+
+    @Inject
+    lateinit var weatherRepository: WeatherRepository
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -27,7 +35,11 @@ class CurrentWeatherFragment : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        viewModel = obtainViewModel(CurrentWeatherViewModel::class.java,requireActivity().application)
+        viewModel = obtainViewModel(
+            CurrentWeatherViewModel::class.java,
+            requireActivity().application,
+            weatherRepository
+        )
         mBinding.viewModel = viewModel
         initView()
         initObservers()
@@ -57,6 +69,11 @@ class CurrentWeatherFragment : Fragment() {
                 }
             })
         }
+    }
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        requireActivity().getAppComponent()?.inject(this)
     }
 
 }

@@ -9,11 +9,12 @@ import com.example.myapplication.ui.weather.data.model.CurrentWeatherResponseMod
 import com.example.myapplication.ui.weather.data.model.ListElement
 import com.example.myapplication.ui.weather.data.model.WeatherForecastResponseModel
 import java.util.*
+import javax.inject.Inject
 
 /**
  * Created by Gulshan Ahluwalia on 2020-02-06.
  */
-class FakeWeatherRepository : WeatherRepository {
+class FakeWeatherRepository @Inject constructor() : WeatherRepository {
     var apiResponseState = SUCCESS
     override suspend fun fetchWeatherForecast(
         latitude: Double,
