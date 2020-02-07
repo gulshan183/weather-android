@@ -1,5 +1,6 @@
 package com.example.myapplication.di
 
+import com.example.myapplication.BuildConfig
 import dagger.Module
 import dagger.Provides
 import okhttp3.*
@@ -19,7 +20,7 @@ class NetworkModule {
     @Provides
     fun provideRetrofitService(): Retrofit {
         return Retrofit.Builder()
-            .baseUrl("https://api.openweathermap.org/data/2.5/")
+            .baseUrl(BuildConfig.SERVER_URL)
             .addConverterFactory(GsonConverterFactory.create())
             .client(getOkHTTPClient())
             .build()

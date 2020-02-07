@@ -29,7 +29,13 @@ android {
     }
 
     buildTypes {
+        def SERVER_URL = "SERVER_URL"
+        def STRING = "String"
+        debug{
+            buildConfigField STRING, SERVER_URL, "\"https://api.openweathermap.org/data/2.5/\""
+        }
         release {
+            buildConfigField STRING, SERVER_URL, "\"https://api.openweathermap.org/data/2.5/\""
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
