@@ -44,7 +44,7 @@ class LocationProvider(
             } else {
                 Toast.makeText(
                     context,
-                    context.getString(R.string.playservice_error),
+                    context.getString(R.string.play_service_error),
                     Toast.LENGTH_LONG
                 ).show()
             }

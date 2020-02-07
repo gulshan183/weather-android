@@ -52,7 +52,7 @@ class CurrentWeatherViewModel(
                     }
                 }
                 _cityWeatherList.value = transformModel(deferreds.awaitAll().filterNotNull())
-                if(exceptionCities.size>0) {
+                if (exceptionCities.size > 0) {
                     throwExceptionForWeatherAPI(exceptionCities)
                 }
             }
@@ -141,12 +141,16 @@ class CurrentWeatherViewModel(
     @Throws(java.lang.IllegalArgumentException::class)
     fun fetchWeatherForecastForCities(citiesCSV: String) {
         val cities = citiesCSV.split(",").filter { it.trim().isNotEmpty() }.distinct()
-        if (cities.size < 3) {
-            throw IllegalArgumentException(context.getString(R.string.cities_min_error))
-        } else if (cities.size > 7) {
-            throw IllegalArgumentException(context.getString(R.string.cities_max_error))
-        } else {
-            fetchWeatherForecast(cities)
+        when {
+            cities.size < 3 -> {
+                throw IllegalArgumentException(context.getString(R.string.cities_min_error))
+            }
+            cities.size > 7 -> {
+                throw IllegalArgumentException(context.getString(R.string.cities_max_error))
+            }
+            else -> {
+                fetchWeatherForecast(cities)
+            }
         }
     }
 

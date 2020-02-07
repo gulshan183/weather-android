@@ -5,7 +5,7 @@ package com.example.myapplication.ui.weather.data.model
  */
 
 
-data class WeatherForecastResponseModel (
+data class WeatherForecastResponseModel(
     val cod: String? = null,
     val message: Double? = null,
     val cnt: Long? = null,
@@ -13,14 +13,14 @@ data class WeatherForecastResponseModel (
     val city: City? = null
 )
 
-data class City (
+data class City(
     val id: Long? = null,
     val name: String? = null,
     val coord: Coord? = null,
     val country: String? = null
 )
 
-data class ListElement (
+data class ListElement(
     val dt: Long? = null,
     val main: Main? = null,
     val weather: List<Weather>? = null,
@@ -32,22 +32,8 @@ data class ListElement (
 )
 
 
-data class Rain (
+data class Rain(
     val the3H: Double? = null
 )
 
-
-enum class Description {
-    BrokenClouds,
-    ClearSky,
-    FewClouds,
-    LightRain,
-    ModerateRain
-}
-
-enum class MainEnum {
-    Clear,
-    Clouds,
-    Rain
-}
 

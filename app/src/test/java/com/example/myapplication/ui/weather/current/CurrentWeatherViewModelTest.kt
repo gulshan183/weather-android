@@ -9,7 +9,7 @@ import com.example.myapplication.R
 import com.example.myapplication.constant.APIResponseState
 import com.example.myapplication.ui.weather.data.FakeWeatherRepository
 import com.google.common.truth.Truth
-import com.mphrx.crpmodule.MainCoroutineRule
+import com.example.myapplication.util.MainCoroutineRule
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import org.junit.Assert
 import org.junit.Before

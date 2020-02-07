@@ -1,5 +1,6 @@
 package com.example.myapplication.ui.main.fragment
 
+import android.content.Context
 import androidx.fragment.app.testing.launchFragmentInContainer
 import androidx.test.espresso.Espresso
 import androidx.test.espresso.IdlingRegistry
@@ -23,7 +24,7 @@ import org.junit.runner.RunWith
 @RunWith(AndroidJUnit4::class)
 class MainFragmentTest {
 
-    val appContext by lazy {
+    private val appContext: Context by lazy {
         InstrumentationRegistry.getInstrumentation().targetContext
     }
 

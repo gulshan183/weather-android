@@ -12,7 +12,7 @@ import retrofit2.http.Query
 interface WeatherNetworkService {
 
     @GET("weather")
-    fun getCurrentWeather(@Query("q") cityName:String):Call<CurrentWeatherResponseModel>
+    fun getCurrentWeather(@Query("q") cityName: String): Call<CurrentWeatherResponseModel>
 
     @GET("forecast")
     fun getForecastWeather(@Query("lat") lat: Double, @Query("lon") lon: Double): Call<WeatherForecastResponseModel>

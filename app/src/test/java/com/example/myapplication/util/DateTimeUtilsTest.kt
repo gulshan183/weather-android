@@ -1,11 +1,11 @@
-package com.example.myapplication
+package com.example.myapplication.util
 
 import android.app.Application
 import android.os.Build
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
-import com.example.myapplication.util.getDateInUIFormat
-import com.example.myapplication.util.getTime
+import com.example.myapplication.MyApplication
+import com.example.myapplication.R
 import com.google.common.truth.Truth
 import org.junit.Before
 import org.junit.Test
@@ -44,7 +44,11 @@ class DateTimeUtilsTest {
             (System.currentTimeMillis() + ((1000 * 60 * 60 * 25) * 2)) / 1000,
             context
         )
-        assert(date != context.getString(R.string.tomorrow) && date != context.getString(R.string.tomorrow))
+        assert(
+            date != context.getString(R.string.tomorrow) && date != context.getString(
+                R.string.tomorrow
+            )
+        )
     }
 
     @Test

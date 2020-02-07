@@ -1,12 +1,15 @@
 package com.example.myapplication.util
 
+import android.annotation.SuppressLint
+
 /**
  * Created by Gulshan Ahluwalia on 2020-02-07.
  */
 
 
+@SuppressLint("DefaultLocale")
 fun String.toTitleCase(): String? {
-    return split(" ").map { it.capitalize() }.joinToString(" ")
+    return split(" ").joinToString(" ") { it.capitalize() }
 }
 
 fun String.toDegreeFormat(): String? {

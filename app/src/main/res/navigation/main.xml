@@ -10,7 +10,7 @@
         android:id="@+id/mainFragment"
         android:name="com.example.myapplication.ui.main.fragment.MainFragment"
         android:label="@string/main_screen"
-        tools:layout="@layout/main_fragment" >
+        tools:layout="@layout/main_fragment">
         <action
             android:id="@+id/action_mainFragment_to_currentWeatherFragment"
             app:destination="@id/currentWeatherFragment"

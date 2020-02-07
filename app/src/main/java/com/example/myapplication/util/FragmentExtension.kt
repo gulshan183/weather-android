@@ -15,6 +15,5 @@ fun <T : ViewModel> Fragment.obtainViewModel(
     context: Application,
     repository: WeatherRepository
 ): T {
-    //val repository = ServiceLocator.provideRepository()
-    return ViewModelProvider(this, ViewModelFactory(repository,context)).get(viewModelClass)
+    return ViewModelProvider(this, ViewModelFactory(repository, context)).get(viewModelClass)
 }

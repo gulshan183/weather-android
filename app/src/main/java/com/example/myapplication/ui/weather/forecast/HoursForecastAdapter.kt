@@ -8,7 +8,7 @@ import com.example.myapplication.databinding.HoursForecastListItemBinding
 /**
  * Created by Gulshan Ahluwalia on 2020-02-06.
  */
-class HoursForecastAdapter(val hoursWeatherList: List<WeatherTime>) :
+class HoursForecastAdapter(private val hoursWeatherList: List<WeatherTime>) :
     RecyclerView.Adapter<HoursForecastAdapter.ViewHolder>() {
 
 

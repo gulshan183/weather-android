@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.mphrx.crpmodule
+package com.example.myapplication.util
 
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers

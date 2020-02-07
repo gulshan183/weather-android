@@ -1,5 +1,6 @@
 package com.example.myapplication
 
+
 import androidx.test.core.app.ActivityScenario
 import androidx.test.espresso.Espresso.onView
 import androidx.test.espresso.Espresso.pressBack
@@ -9,7 +10,6 @@ import androidx.test.espresso.assertion.ViewAssertions.matches
 import androidx.test.espresso.matcher.ViewMatchers.*
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.filters.LargeTest
-import androidx.test.platform.app.InstrumentationRegistry
 import com.example.myapplication.ui.main.activity.MainActivity
 import com.example.myapplication.util.DataBindingIdlingResource
 import com.example.myapplication.util.EspressoIdlingResource
@@ -25,10 +25,6 @@ import org.junit.runner.RunWith
 @RunWith(AndroidJUnit4::class)
 @LargeTest
 class AppNavigationTest {
-
-    val appContext by lazy {
-        InstrumentationRegistry.getInstrumentation().targetContext
-    }
 
 
     private val dataBindingIdlingResource = DataBindingIdlingResource()
@@ -70,7 +66,7 @@ class AppNavigationTest {
         dataBindingIdlingResource.monitorActivity(scenario)
         onView(withId(R.id.bt_step1)).perform(click())
         onView(withId(R.id.ti_search)).check(matches(isDisplayed()))
-        onView(withContentDescription(R.string.abc_action_bar_up_description)).perform(click());
+        onView(withContentDescription(R.string.abc_action_bar_up_description)).perform(click())
         onView(withId(R.id.main)).check(matches(isDisplayed()))
     }
 
@@ -98,7 +94,7 @@ class AppNavigationTest {
         dataBindingIdlingResource.monitorActivity(scenario)
         onView(withId(R.id.bt_step2)).perform(click())
         onView(withId(R.id.cl_weather_forecast)).check(matches(isDisplayed()))
-        onView(withContentDescription(R.string.abc_action_bar_up_description)).perform(click());
+        onView(withContentDescription(R.string.abc_action_bar_up_description)).perform(click())
         onView(withId(R.id.main)).check(matches(isDisplayed()))
     }
 }

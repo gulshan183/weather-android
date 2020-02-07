@@ -31,7 +31,7 @@ android {
     buildTypes {
         def SERVER_URL = "SERVER_URL"
         def STRING = "String"
-        debug{
+        debug {
             buildConfigField STRING, SERVER_URL, "\"https://api.openweathermap.org/data/2.5/\""
         }
         release {

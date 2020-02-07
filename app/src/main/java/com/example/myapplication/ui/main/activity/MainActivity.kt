@@ -10,8 +10,8 @@ import com.example.myapplication.R
 
 class MainActivity : AppCompatActivity() {
 
-    lateinit var navController:NavController
-    lateinit var navHostFragment: NavHostFragment
+    private lateinit var navController: NavController
+    private lateinit var navHostFragment: NavHostFragment
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

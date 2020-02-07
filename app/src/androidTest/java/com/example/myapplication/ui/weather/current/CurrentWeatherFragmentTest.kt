@@ -1,12 +1,12 @@
 package com.example.myapplication.ui.weather.current
 
+import android.content.Context
 import androidx.fragment.app.testing.launchFragmentInContainer
 import androidx.test.espresso.Espresso.onView
 import androidx.test.espresso.IdlingRegistry
 import androidx.test.espresso.action.ViewActions.*
 import androidx.test.espresso.assertion.ViewAssertions.matches
 import androidx.test.espresso.contrib.RecyclerViewActions
-import androidx.test.espresso.matcher.ViewMatchers
 import androidx.test.espresso.matcher.ViewMatchers.*
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.filters.MediumTest
@@ -28,7 +28,7 @@ import org.junit.runner.RunWith
 @RunWith(AndroidJUnit4::class)
 @MediumTest
 class CurrentWeatherFragmentTest {
-    val appContext by lazy {
+    private val appContext: Context by lazy {
         InstrumentationRegistry.getInstrumentation().targetContext
     }
 
@@ -54,7 +54,7 @@ class CurrentWeatherFragmentTest {
         val scenario =
             launchFragmentInContainer<CurrentWeatherFragment>(themeResId = R.style.AppTheme)
         dataBindingIdlingResource.monitorFragment(scenario)
-        onView(ViewMatchers.withId(R.id.ti_search)).check(matches(isDisplayed()))
+        onView(withId(R.id.ti_search)).check(matches(isDisplayed()))
     }
 
     @Test
@@ -62,7 +62,7 @@ class CurrentWeatherFragmentTest {
         val scenario =
             launchFragmentInContainer<CurrentWeatherFragment>(themeResId = R.style.AppTheme)
         dataBindingIdlingResource.monitorFragment(scenario)
-        onView(ViewMatchers.withId(R.id.list)).check(RecyclerViewItemCountAssertion(0));
+        onView(withId(R.id.list)).check(RecyclerViewItemCountAssertion(0))
     }
 
     @Test
@@ -75,7 +75,7 @@ class CurrentWeatherFragmentTest {
             typeText("Ludhiana,New york,ABC"),
             pressImeActionButton()
         )
-        onView(withId(R.id.list)).check(RecyclerViewItemCountAssertion(3));
+        onView(withId(R.id.list)).check(RecyclerViewItemCountAssertion(3))
     }
 
     @Test

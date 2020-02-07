@@ -64,8 +64,8 @@ class CurrentWeatherFragment : Fragment() {
     private fun initObservers() {
         viewModel.run {
             toastMessage.observe(viewLifecycleOwner, Observer {
-                if(it!=null){
-                    Toast.makeText(requireContext(),it, Toast.LENGTH_LONG).show()
+                if (it != null) {
+                    Toast.makeText(requireContext(), it, Toast.LENGTH_LONG).show()
                 }
             })
         }

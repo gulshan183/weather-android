@@ -7,8 +7,8 @@ import androidx.fragment.app.Fragment
 /**
  * Created by Gulshan Ahluwalia on 2020-02-05.
  */
+private const val REQUEST_PERMISSION = 100
 abstract class PermissionAwareFragment : Fragment() {
-    private val REQUEST_PERMISSION = 100;
     abstract fun onPermissionGranted()
     abstract fun onPermissionNotGranted()
 

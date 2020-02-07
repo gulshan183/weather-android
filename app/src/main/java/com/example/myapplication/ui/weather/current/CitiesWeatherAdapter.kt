@@ -18,13 +18,13 @@ class CitiesWeatherAdapter
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
-    ): CitiesWeatherAdapter.ViewHolder {
+    ): ViewHolder {
         val inflater = LayoutInflater.from(parent.context)
         val binding = CurrentWeatherListItemBinding.inflate(inflater, parent, false)
         return ViewHolder(binding)
     }
 
-    override fun onBindViewHolder(holder: CitiesWeatherAdapter.ViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.mBinding.item = getItem(position)
     }
 

@@ -1,5 +1,6 @@
 package com.example.myapplication.ui.weather.forecast
 
+import android.content.Context
 import androidx.fragment.app.testing.launchFragmentInContainer
 import androidx.test.espresso.Espresso.onView
 import androidx.test.espresso.IdlingRegistry
@@ -25,14 +26,14 @@ import org.junit.runner.RunWith
  */
 @RunWith(AndroidJUnit4::class)
 class ForecastWeatherFragmentTest {
-    val appContext by lazy {
+    private val appContext:Context by lazy {
         InstrumentationRegistry.getInstrumentation().targetContext
     }
 
     private val dataBindingIdlingResource = DataBindingIdlingResource()
 
     @get:Rule
-    var permissionRule =
+    var permissionRule:GrantPermissionRule =
         GrantPermissionRule.grant(android.Manifest.permission.ACCESS_COARSE_LOCATION)
 
     @Before
@@ -81,7 +82,7 @@ class ForecastWeatherFragmentTest {
     fun data_totalCount() {
         val scenario = launchFragmentInContainer<ForecastWeatherFragment>()
         dataBindingIdlingResource.monitorFragment(scenario)
-        onView(withId(R.id.list)).check(RecyclerViewItemCountAssertion(2));
+        onView(withId(R.id.list)).check(RecyclerViewItemCountAssertion(2))
     }
 
 }

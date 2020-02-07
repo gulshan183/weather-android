@@ -20,7 +20,7 @@ class ViewModelFactory constructor(
         with(modelClass) {
             when {
                 isAssignableFrom(CurrentWeatherViewModel::class.java) ->
-                    CurrentWeatherViewModel(context,weatherRepository)
+                    CurrentWeatherViewModel(context, weatherRepository)
                 isAssignableFrom(ForecastWeatherViewModel::class.java) ->
                     ForecastWeatherViewModel(weatherRepository, context)
                 else ->

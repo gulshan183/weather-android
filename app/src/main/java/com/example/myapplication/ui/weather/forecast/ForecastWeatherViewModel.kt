@@ -41,7 +41,7 @@ class ForecastWeatherViewModel(
         get() = _loadingState
 
     fun fetchWeatherForecast(location: Location) {
-        launchDataLoad{
+        launchDataLoad {
             val list = transformModel(
                 repository.fetchWeatherForecast(
                     location.latitude,
@@ -91,8 +91,10 @@ class ForecastWeatherViewModel(
         } ?: emptyMap()
     }
 
-    private fun launchDataLoad(loadingLiveData: MutableLiveData<Boolean> = _loadingState,
-                               block: suspend () -> Unit): Job {
+    private fun launchDataLoad(
+        loadingLiveData: MutableLiveData<Boolean> = _loadingState,
+        block: suspend () -> Unit
+    ): Job {
         loadingLiveData.value = true
         return viewModelScope.launch {
             try {

@@ -5,7 +5,7 @@ import com.google.gson.annotations.SerializedName
 /**
  * Created by Gulshan Ahluwalia on 2020-02-04.
  */
-data class CurrentWeatherResponseModel (
+data class CurrentWeatherResponseModel(
     val coord: Coord? = null,
     val weather: List<Weather>? = null,
     val base: String? = null,
@@ -19,16 +19,16 @@ data class CurrentWeatherResponseModel (
     val cod: Long? = null
 )
 
-data class Clouds (
+data class Clouds(
     val all: Long? = null
 )
 
-data class Coord (
+data class Coord(
     val lon: Double? = null,
     val lat: Double? = null
 )
 
-data class Main (
+data class Main(
     val temp: Double? = null,
     val pressure: Long? = null,
     val humidity: Long? = null,
@@ -36,14 +36,14 @@ data class Main (
     @SerializedName("temp_max") val tempMax: Double? = null
 )
 
-data class Weather (
+data class Weather(
     val id: Long? = null,
     val main: String? = null,
     val description: String? = null,
     val icon: String? = null
 )
 
-data class Wind (
+data class Wind(
     val speed: Double? = null,
     val deg: Long? = null
 )

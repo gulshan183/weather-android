@@ -2,8 +2,6 @@ package com.example.myapplication.network
 
 import kotlinx.coroutines.suspendCancellableCoroutine
 import retrofit2.Call
-import kotlin.coroutines.resume
-import kotlin.coroutines.resumeWithException
 
 /**
  * Created by Gulshan Ahluwalia on 2020-02-04.
