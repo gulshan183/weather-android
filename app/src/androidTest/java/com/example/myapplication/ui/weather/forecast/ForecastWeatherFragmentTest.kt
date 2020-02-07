@@ -1,4 +1,4 @@
-package com.example.myapplication.ui.weather
+package com.example.myapplication.ui.weather.forecast
 
 import androidx.fragment.app.testing.launchFragmentInContainer
 import androidx.test.espresso.Espresso.onView
@@ -10,8 +10,6 @@ import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.rule.GrantPermissionRule
 import com.example.myapplication.R
-import com.example.myapplication.ui.weather.forecast.DaysForecastAdapter
-import com.example.myapplication.ui.weather.forecast.ForecastWeatherFragment
 import com.example.myapplication.util.DataBindingIdlingResource
 import com.example.myapplication.util.RecyclerViewItemCountAssertion
 import com.example.myapplication.util.monitorFragment
