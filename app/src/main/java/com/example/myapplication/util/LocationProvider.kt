@@ -57,8 +57,9 @@ class LocationProvider(
         return LocationRequest().apply {
             priority =
                 LocationRequest.PRIORITY_BALANCED_POWER_ACCURACY
-            interval = 10 * 100
-            fastestInterval = 100
+            interval = 10 * 1000
+            fastestInterval = 1000
+            smallestDisplacement = 1F
         }
 
     }
