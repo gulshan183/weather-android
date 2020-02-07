@@ -89,7 +89,12 @@ class ForecastWeatherFragment : PermissionAwareFragment() {
 
     override fun onStart() {
         super.onStart()
-        requestPermissions(arrayOf(android.Manifest.permission.ACCESS_COARSE_LOCATION))
+        requestPermissions(
+            arrayOf(
+                android.Manifest.permission.ACCESS_COARSE_LOCATION,
+                android.Manifest.permission.ACCESS_FINE_LOCATION
+            )
+        )
     }
 
     private fun initObservers() {
