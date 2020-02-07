@@ -4,4 +4,6 @@
     <color name="colorPrimaryDark">#00574B</color>
     <color name="colorAccent">#D81B60</color>
     <color name="card_bg">#f8f8ff</color>
+
+    <color name="text_color_faded">#B1B1B1</color>
 </resources>

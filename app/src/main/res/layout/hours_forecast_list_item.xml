@@ -14,7 +14,9 @@
     <androidx.cardview.widget.CardView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:cardElevation="2dp"
+        android:layout_marginStart="2dp"
+        app:cardCornerRadius="14dp"
+        app:cardElevation="8dp"
         app:cardUseCompatPadding="true">
 
         <LinearLayout
@@ -23,42 +25,74 @@
             android:orientation="vertical"
             android:padding="@dimen/cardview_padding">
 
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingBottom="15dp">
 
-            <TextView
-                visible="@{item.time!=null}"
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@{item.time}"
+                    android:textSize="14sp"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:text="2 AM" />
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@{item.windSpeed}"
+                    android:textSize="14sp"
+                    android:textStyle="italic"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:text="14.2 m/s">
+
+                </TextView>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@{item.time}"
-                tools:text="2 AM" />
+                android:layout_gravity="center"
+                android:layout_marginStart="30dp"
+                android:layout_marginEnd="30dp"
+                android:gravity="center"
+                android:orientation="vertical"
+                tools:ignore="UseCompoundDrawables">
 
-            <TextView
-                visible="@{item.description!=null}"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@{item.description}"
-                tools:text="Clear Sky" />
+                <ImageView
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:contentDescription="@string/weather_icon"
+                    app:weather_icon="@{item.iconCode}"
+                    tools:src="@drawable/ic_weather_placeholder" />
 
-            <TextView
-                visible="@{item.maxTemp!=null}"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@{item.maxTemp}"
-                tools:text="14" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="2dp"
+                    android:text="@{item.description}"
+                    android:textColor="@color/text_color_faded"
+                    android:textSize="12sp"
+                    android:textStyle="italic"
+                    tools:text="Clear Sky" />
 
-            <TextView
-                visible="@{item.minTemp!=null}"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@{item.minTemp}"
-                tools:text="10" />
-
-            <TextView
-                visible="@{item.windSpeed!=null}"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@{item.windSpeed}"
-                tools:text="2.4" />
-
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:text="@{item.temp}"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    tools:text="14&#xb0; / 10&#xb0;" />
+            </LinearLayout>
 
         </LinearLayout>
     </androidx.cardview.widget.CardView>

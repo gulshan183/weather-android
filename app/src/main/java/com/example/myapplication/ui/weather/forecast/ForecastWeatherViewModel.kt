@@ -11,8 +11,7 @@ import com.example.myapplication.ui.weather.data.NetworkWeatherRepository
 import com.example.myapplication.ui.weather.data.WeatherRepository
 import com.example.myapplication.ui.weather.data.model.ListElement
 import com.example.myapplication.ui.weather.data.model.WeatherForecastResponseModel
-import com.example.myapplication.util.getDateInUIFormat
-import com.example.myapplication.util.getTime
+import com.example.myapplication.util.*
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 
@@ -68,11 +67,17 @@ class ForecastWeatherViewModel(
             ForecastWeatherModel(
                 weatherHours = entry.value.map {
                     WeatherTime(
-                        maxTemp = it.main?.tempMax?.toString(),
-                        minTemp = it.main?.tempMin?.toString(),
-                        windSpeed = it.wind?.speed?.toString(),
-                        description = it.weather?.getOrNull(0)?.description,
-                        time = getTime(it.dt)
+                        getMinMaxDegreeFormat(
+                            it.main?.tempMax?.toString(),
+                            it.main?.tempMin?.toString()
+                        ) ?: context.getString(R.string.unavailable),
+                        windSpeed = it.wind?.speed?.toString()?.toWindFormat() ?: context.getString(
+                            R.string.unavailable
+                        ),
+                        description = it.weather?.getOrNull(0)?.description?.toTitleCase()
+                            ?: context.getString(R.string.unavailable),
+                        time = getTime(it.dt) ?: context.getString(R.string.unavailable),
+                        iconCode = it.weather?.getOrNull(0)?.icon
                     )
                 },
                 date = entry.key

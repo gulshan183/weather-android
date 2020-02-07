@@ -9,23 +9,28 @@
     tools:context=".ui.main.fragment.MainFragment">
 
 
-    <Button
-        android:id="@+id/bt_step1"
+    <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/current_weather"
+        android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent">
 
-    <Button
-        android:id="@+id/bt_step2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
-        android:text="@string/weather_forecast"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/bt_step1" />
+        <Button
+            android:id="@+id/bt_step1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/current_weather"
+            android:elevation="16dp" />
+
+        <Button
+            android:id="@+id/bt_step2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="90dp"
+            android:elevation="16dp"
+            android:text="@string/weather_forecast" />
+    </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -12,6 +12,10 @@ import com.example.myapplication.network.NO_INTERNET
 import com.example.myapplication.ui.weather.data.NetworkWeatherRepository
 import com.example.myapplication.ui.weather.data.WeatherRepository
 import com.example.myapplication.ui.weather.data.model.CurrentWeatherResponseModel
+import com.example.myapplication.util.getMinMaxDegreeFormat
+import com.example.myapplication.util.toDegreeFormat
+import com.example.myapplication.util.toTitleCase
+import com.example.myapplication.util.toWindFormat
 import kotlinx.coroutines.*
 
 class CurrentWeatherViewModel(
@@ -60,14 +64,23 @@ class CurrentWeatherViewModel(
         return responseList.map {
             CurrentWeatherModel(
                 cityId = it.id ?: 0,
-                cityName = it.name,
-                maxTemp = it.main?.tempMax?.toString(),
-                minTemp = it.main?.tempMin?.toString(),
-                windSpeed = it.wind?.speed?.toString(),
-                description = it.weather?.getOrNull(0)?.description
+                cityName = it.name ?: context.getString(R.string.unavailable),
+                temp = it.main?.temp?.toString()?.toDegreeFormat()
+                    ?: context.getString(R.string.unavailable),
+                maxMinTemp = getMinMaxDegreeFormat(
+                    it.main?.tempMax?.toString(),
+                    it.main?.tempMin?.toString()
+                ) ?: context.getString(R.string.unavailable),
+                windSpeed = it.wind?.speed?.toString()?.toWindFormat()
+                    ?: context.getString(R.string.unavailable),
+                description = it.weather?.getOrNull(0)?.description?.toTitleCase()
+                    ?: context.getString(R.string.unavailable),
+                iconCode = it.weather?.getOrNull(0)?.icon
+
             )
         }.distinctBy { it.cityId }
     }
+
 
     private fun throwExceptionForWeatherAPI(exceptionCities: ArrayList<ErrorModel>) {
         val notFoundList = ArrayList<String>()

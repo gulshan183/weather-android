@@ -6,10 +6,11 @@ package com.example.myapplication.ui.weather.current
 data class CurrentWeatherModel(
     val cityId: Long = 0,
     val cityName: String? = null,
-    val minTemp: String? = null,
-    val maxTemp: String? = null,
+    val maxMinTemp: String? = null,
+    val temp: String? = null,
     val windSpeed: String? = null,
-    val description: String? = null
+    val description: String? = null,
+    val iconCode: String? = null
 ) {
     override fun equals(other: Any?): Boolean {
         if (other !is CurrentWeatherModel) {
@@ -21,8 +22,8 @@ data class CurrentWeatherModel(
     override fun hashCode(): Int {
         var result = cityId.hashCode()
         result = 31 * result + (cityName?.hashCode() ?: 0)
-        result = 31 * result + (minTemp?.hashCode() ?: 0)
-        result = 31 * result + (maxTemp?.hashCode() ?: 0)
+        result = 31 * result + (maxMinTemp?.hashCode() ?: 0)
+        result = 31 * result + (temp?.hashCode() ?: 0)
         result = 31 * result + (windSpeed?.hashCode() ?: 0)
         result = 31 * result + (description?.hashCode() ?: 0)
         return result
@@ -30,8 +31,8 @@ data class CurrentWeatherModel(
 
     fun areContentsTheSame(newItem: CurrentWeatherModel): Boolean {
         return cityName == newItem.cityName &&
-                minTemp == newItem.minTemp &&
-                maxTemp == newItem.maxTemp &&
+                maxMinTemp == newItem.maxMinTemp &&
+                temp == newItem.temp &&
                 windSpeed == newItem.windSpeed &&
                 description == newItem.description
 

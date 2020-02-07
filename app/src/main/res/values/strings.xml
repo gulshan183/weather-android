@@ -29,5 +29,8 @@
     <!--Date and time-->
     <string name="today">Today</string>
     <string name="tomorrow">Tomorrow</string>
+    <string name="wind">Wind</string>
+    <string name="weather_icon">Weather Icon</string>
+    <string name="unavailable">Unavailable</string>
 
 </resources>

@@ -9,9 +9,9 @@ data class ForecastWeatherModel(
 )
 
 data class WeatherTime(
-    val minTemp: String? = null,
-    val maxTemp: String? = null,
+    val temp: String? = null,
     val windSpeed: String? = null,
     val description: String? = null,
-    val time: String? = null
+    val time: String? = null,
+    val iconCode: String? = null
 )
