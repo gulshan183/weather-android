@@ -11,6 +11,13 @@ import dagger.Module
 @Module
 abstract class RepositoryModule {
 
+    /**
+     * Binds [NetworkWeatherRepository] to [WeatherRepository]
+     * This is will be injected in view model constructor.
+     *
+     * @param repository
+     * @return [WeatherRepository]
+     */
     @Binds
     abstract fun provideRepository(repository: NetworkWeatherRepository): WeatherRepository
 }

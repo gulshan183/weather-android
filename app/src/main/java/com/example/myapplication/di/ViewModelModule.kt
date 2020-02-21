@@ -15,11 +15,25 @@ import dagger.multibindings.IntoMap
 
 @Module
 abstract class ViewModelModule {
+    /**
+     * Creating [Map.Entry] for [CurrentWeatherViewModel] to be used in multiple
+     * binding for grouping similar dependencies
+     *
+     * @param currentWeatherViewModel
+     * @return [ViewModel]
+     */
     @Binds
     @IntoMap
     @ViewModelKey(CurrentWeatherViewModel::class)
     abstract fun bindCurrentWeatherViewModel(currentWeatherViewModel: CurrentWeatherViewModel):ViewModel
 
+    /**
+     * Creating [Map.Entry] for [ForecastWeatherViewModel] to be used in multiple
+     * binding for grouping similar dependencies
+     *
+     * @param currentWeatherViewModel
+     * @return [ViewModel]
+     */
     @Binds
     @IntoMap
     @ViewModelKey(ForecastWeatherViewModel::class)

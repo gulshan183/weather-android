@@ -16,6 +16,14 @@ import javax.inject.Singleton
 @Module
 class NetworkModule {
 
+    /**
+     * Provides retrofit object. Annotated Singleton, therefore will have single instance
+     * for complete lifecycle of application.
+     *
+     * @see [Retrofit]
+     *
+     * @return [Retrofit]
+     */
     @Singleton
     @Provides
     fun provideRetrofitService(): Retrofit {
@@ -26,6 +34,11 @@ class NetworkModule {
             .build()
     }
 
+    /**
+     * Provides OkHttpClient having interceptor for headers and logs
+     *
+     * @return [OkHttpClient]
+     */
     private fun getOkHTTPClient(): OkHttpClient {
         return OkHttpClient.Builder().addInterceptor(object : Interceptor {
             @Throws(IOException::class)
@@ -46,6 +59,9 @@ class NetworkModule {
             .build()
     }
 
+    /**
+     * @return [HttpLoggingInterceptor] for logging Network calls
+     */
     private fun getHTTPLoggingInterceptor(): HttpLoggingInterceptor {
         return HttpLoggingInterceptor().apply {
             level = HttpLoggingInterceptor.Level.BODY

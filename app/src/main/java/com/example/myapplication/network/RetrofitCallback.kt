@@ -13,7 +13,18 @@ import kotlin.coroutines.resumeWithException
 /**
  * Created by Gulshan Ahluwalia on 2020-02-04.
  */
+
+/**
+ * Custom callback for network calls via Retrofit.
+ *
+ * @property continuation of [Continuation] to #resume or #resumeWithException. Helps to write
+ * sequential code.
+ */
 class RetrofitCallback<T>(private val continuation: Continuation<T>) : Callback<T> {
+
+    /**
+     * Handles mostly network calls failed due network or server outage
+     */
     override fun onFailure(call: Call<T>, t: Throwable) {
         if (t is IOException) {
             if (t is SocketTimeoutException) {
@@ -32,7 +43,9 @@ class RetrofitCallback<T>(private val continuation: Continuation<T>) : Callback<
         }
     }
 
-
+    /**
+     * Handling HTTP Responses. Currently supports 200, 401, 404 HTTP codes gracefully
+     */
     override fun onResponse(call: Call<T>, response: Response<T>) {
         when (response.code()) {
 
@@ -55,6 +68,13 @@ class RetrofitCallback<T>(private val continuation: Continuation<T>) : Callback<
         }
     }
 
+    /**
+     * Causing the [Continuation] to resume with exception
+     *
+     * @param msgResId error message resource ID
+     * @param message error message, might not be user friendly
+     * @param errorCode
+     */
     private fun onFailure(
         msgResId: Int? = null,
         message: String? = null,
