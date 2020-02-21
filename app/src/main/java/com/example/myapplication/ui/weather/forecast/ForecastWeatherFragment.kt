@@ -10,12 +10,15 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.myapplication.R
 import com.example.myapplication.databinding.ForecastWeatherFragmentBinding
 import com.example.myapplication.ui.util.PermissionAwareFragment
+import com.example.myapplication.ui.weather.current.CurrentWeatherViewModel
 import com.example.myapplication.ui.weather.data.WeatherRepository
 import com.example.myapplication.util.*
 import javax.inject.Inject
@@ -23,12 +26,16 @@ import javax.inject.Inject
 
 class ForecastWeatherFragment : PermissionAwareFragment() {
 
-    private lateinit var viewModel: ForecastWeatherViewModel
+
     private lateinit var locationProvider: LocationProvider
     private lateinit var mBinding: ForecastWeatherFragmentBinding
 
     @Inject
-    lateinit var weatherRepository: WeatherRepository
+    lateinit var viewModelFactory: ViewModelProvider.Factory
+
+    private val viewModel: ForecastWeatherViewModel by viewModels {
+        viewModelFactory
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -40,6 +47,7 @@ class ForecastWeatherFragment : PermissionAwareFragment() {
     }
 
     override fun onPermissionGranted() {
+        if(mBinding.list.adapter?.itemCount?:0 == 0)
         observerCurrentLocation()
     }
 
@@ -62,11 +70,6 @@ class ForecastWeatherFragment : PermissionAwareFragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        viewModel = obtainViewModel(
-            ForecastWeatherViewModel::class.java,
-            requireActivity().application,
-            weatherRepository
-        )
         mBinding.viewModel = viewModel
         initObservers()
         initView()

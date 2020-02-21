@@ -17,8 +17,9 @@ import com.example.myapplication.util.toDegreeFormat
 import com.example.myapplication.util.toTitleCase
 import com.example.myapplication.util.toWindFormat
 import kotlinx.coroutines.*
+import javax.inject.Inject
 
-class CurrentWeatherViewModel(
+class CurrentWeatherViewModel @Inject constructor(
     private val context: Application,
     private val repository: WeatherRepository
 ) : AndroidViewModel(context) {

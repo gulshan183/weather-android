@@ -15,7 +15,7 @@ open class MyApplication : Application() {
 
 
     open fun initializeComponent(): AppComponent {
-        return DaggerAppComponent.create()
+        return DaggerAppComponent.builder().application(this).build()
     }
 
 }

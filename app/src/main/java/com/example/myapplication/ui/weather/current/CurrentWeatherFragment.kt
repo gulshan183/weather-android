@@ -7,22 +7,28 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.myapplication.databinding.CurrentWeatherFragmentBinding
 import com.example.myapplication.ui.weather.data.WeatherRepository
+import com.example.myapplication.util.ViewModelFactory
 import com.example.myapplication.util.getAppComponent
-import com.example.myapplication.util.obtainViewModel
 import com.example.myapplication.util.onSubmit
 import javax.inject.Inject
 
 class CurrentWeatherFragment : Fragment() {
 
-    private lateinit var viewModel: CurrentWeatherViewModel
+
     private lateinit var mBinding: CurrentWeatherFragmentBinding
 
     @Inject
-    lateinit var weatherRepository: WeatherRepository
+    lateinit var viewModelFactory: ViewModelProvider.Factory
+
+    private val viewModel: CurrentWeatherViewModel by viewModels {
+        viewModelFactory
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -35,11 +41,6 @@ class CurrentWeatherFragment : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        viewModel = obtainViewModel(
-            CurrentWeatherViewModel::class.java,
-            requireActivity().application,
-            weatherRepository
-        )
         mBinding.viewModel = viewModel
         initView()
         initObservers()

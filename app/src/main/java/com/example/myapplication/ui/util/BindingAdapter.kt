@@ -29,7 +29,7 @@ fun <T> setRecyclerViewProperties(recyclerView: RecyclerView, items: List<T>?) {
 @BindingAdapter("weather_icon")
 fun setWeatherIcon(imageView: ImageView, iconCode: String?) {
     Picasso.get()
-        .load(if (iconCode != null) "http://openweathermap.org/img/w/$iconCode.png" else null)
+        .load(if (iconCode != null) "https://openweathermap.org/img/w/$iconCode.png" else null)
         .placeholder(R.drawable.ic_weather_placeholder)
         .into(imageView)
 }

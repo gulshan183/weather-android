@@ -14,8 +14,9 @@ import com.example.myapplication.ui.weather.data.model.WeatherForecastResponseMo
 import com.example.myapplication.util.*
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class ForecastWeatherViewModel(
+class ForecastWeatherViewModel @Inject constructor(
     private val repository: WeatherRepository,
     private val context: Application
 ) : AndroidViewModel(context) {
