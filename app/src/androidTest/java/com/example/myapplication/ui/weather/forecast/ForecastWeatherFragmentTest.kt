@@ -34,7 +34,8 @@ class ForecastWeatherFragmentTest {
 
     @get:Rule
     var permissionRule:GrantPermissionRule =
-        GrantPermissionRule.grant(android.Manifest.permission.ACCESS_COARSE_LOCATION)
+        GrantPermissionRule.grant(android.Manifest.permission.ACCESS_COARSE_LOCATION,
+            android.Manifest.permission.ACCESS_FINE_LOCATION)
 
     @Before
     fun registerIdlingResource() {
