@@ -1,6 +1,7 @@
 package com.example.myapplication
 
 import com.example.myapplication.di.AppComponent
+import com.example.myapplication.di.DaggerAppComponent
 import com.example.myapplication.di.DaggerTestAppComponent
 
 
@@ -9,6 +10,6 @@ import com.example.myapplication.di.DaggerTestAppComponent
  */
 class MyTestApplication : MyApplication() {
     override fun initializeComponent(): AppComponent {
-        return DaggerTestAppComponent.create()
+        return DaggerTestAppComponent.builder().application(this).build()
     }
 }
