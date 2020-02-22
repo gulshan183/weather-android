@@ -14,6 +14,12 @@ import javax.inject.Inject
 /**
  * Created by Gulshan Ahluwalia on 2020-02-06.
  */
+
+/**
+ * Fake [WeatherRepository] for testing.
+ * All response states are mocked
+ *
+ */
 class FakeWeatherRepository @Inject constructor() : WeatherRepository {
     var apiResponseState = SUCCESS
     override suspend fun fetchWeatherForecast(

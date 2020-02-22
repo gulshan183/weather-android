@@ -17,6 +17,11 @@ import java.io.IOException
  * Created by Gulshan Ahluwalia on 2020-02-06.
  */
 
+/**
+ * Mocks the [WeatherNetworkService] for each API call and its different responses.
+ *
+ * @property delegate
+ */
 class APIServiceMock(private val delegate: BehaviorDelegate<WeatherNetworkService?>) :
     WeatherNetworkService {
 

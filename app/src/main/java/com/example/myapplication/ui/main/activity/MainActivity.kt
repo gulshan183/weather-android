@@ -17,10 +17,11 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.main_activity)
 
+        //init Navigation Host fragment to accommodate the navigation between all the fragments
         navHostFragment = supportFragmentManager
             .findFragmentById(R.id.nav_host_fragment) as NavHostFragment? ?: return
 
-        // Set up Action Bar
+        // Set up Action Bar with Navigation component
         navController = navHostFragment.navController
         setupActionBarWithNavController(this, navController)
     }

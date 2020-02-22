@@ -12,6 +12,12 @@ import org.hamcrest.MatcherAssert.assertThat
  * Created by Gulshan Ahluwalia on 2020-02-07.
  */
 
+/**
+ * Assert that the total count of items under [RecyclerView.Adapter] is as expected.
+ *
+ * @property expectedCount
+ */
+
 class RecyclerViewItemCountAssertion(private val expectedCount: Int) : ViewAssertion {
     override fun check(view: View, noViewFoundException: NoMatchingViewException?) {
         if (noViewFoundException != null) {

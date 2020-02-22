@@ -46,11 +46,17 @@ class ForecastWeatherFragment : PermissionAwareFragment() {
         return mBinding.root
     }
 
+    /**
+     * Start to observe location on permission granted.
+     */
     override fun onPermissionGranted() {
         if(mBinding.list.adapter?.itemCount?:0 == 0)
         observerCurrentLocation()
     }
 
+    /**
+     * Start to observe location. Once location is fetched it stops the location service
+     */
     private fun observerCurrentLocation() {
         viewModel.showLoader()
         locationProvider.requestLocationUpdates(object : LocationUpdateCallback {
@@ -63,6 +69,7 @@ class ForecastWeatherFragment : PermissionAwareFragment() {
     }
 
 
+    // Navigate up if the permission is not granted
     override fun onPermissionNotGranted() {
         findNavController().navigateUp()
         Toast.makeText(context, R.string.location_permission_required, Toast.LENGTH_LONG).show()
@@ -76,6 +83,9 @@ class ForecastWeatherFragment : PermissionAwareFragment() {
     }
 
     private fun initView() {
+
+        //Initialize location service with lifecycle observer. Such that it will stop once
+        //this fragment destroys
         locationProvider = LocationProvider(requireActivity(), lifecycle)
         lifecycle.addObserver(locationProvider)
 
@@ -92,6 +102,8 @@ class ForecastWeatherFragment : PermissionAwareFragment() {
 
     override fun onStart() {
         super.onStart()
+
+        //Request for the permissions required to get current location
         requestPermissions(
             arrayOf(
                 android.Manifest.permission.ACCESS_COARSE_LOCATION,

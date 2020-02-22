@@ -38,11 +38,22 @@ class CurrentWeatherViewModel @Inject constructor(
     val isLoading: LiveData<Boolean>
         get() = _loadingState
 
-    private fun fetchWeatherForecast(cityName: List<String>) {
+    /**
+     * Fetch the weather for the city names. It creates the [CoroutineScope.async] for each city.
+     * The list of [CoroutineScope.async] is created for the cities. Later [awaitAll] is used to
+     * **await** for each response.
+     *
+     * Any error in the individual response is added to the list of exceptions. Which is later used
+     * to update the UI.
+     *
+     *
+     * @param cityNames List of city names
+     */
+    private fun fetchWeatherForecast(cityNames: List<String>) {
         launchDataLoad { asyncScope ->
             asyncScope.run {
                 val exceptionCities = ArrayList<ErrorModel>()
-                val deferreds = cityName.map {
+                val deferreds = cityNames.map {
                     async {
                         try {
                             repository.fetchCurrentWeather(it)
@@ -61,6 +72,12 @@ class CurrentWeatherViewModel @Inject constructor(
         }
     }
 
+    /**
+     * Transforms the response from API to a model which will be used to update UI
+     *
+     * @param responseList
+     * @return [List] of [CurrentWeatherModel]
+     */
     private fun transformModel(responseList: List<CurrentWeatherResponseModel>): List<CurrentWeatherModel> {
         return responseList.map {
             CurrentWeatherModel(
@@ -83,6 +100,11 @@ class CurrentWeatherViewModel @Inject constructor(
     }
 
 
+    /**
+     * Handle exceptions(to update UI) thrown by each API call.
+     *
+     * @param exceptionCities
+     */
     private fun throwExceptionForWeatherAPI(exceptionCities: ArrayList<ErrorModel>) {
         val notFoundList = ArrayList<String>()
         val noInternetList = ArrayList<String>()
@@ -118,6 +140,14 @@ class CurrentWeatherViewModel @Inject constructor(
         } else ""
     }
 
+    /**
+     * Handles the [CoroutineScope] with respect to the lifecycle of [AndroidViewModel].
+     * Also maintains the loading state of UI. Which would otherwise to become boilerplate code.
+     *
+     * @param loadingLiveData
+     * @param block
+     * @return [Job] which is cancellable
+     */
     private fun launchDataLoad(
         loadingLiveData: MutableLiveData<Boolean> = _loadingState,
         block: suspend (coroutineScope: CoroutineScope) -> Unit
@@ -139,6 +169,13 @@ class CurrentWeatherViewModel @Inject constructor(
 
     }
 
+    /**
+     * Take cities, handle their validations and proceed to fetch their weather data.
+     * @throws [IllegalArgumentException] if the cities are not in the valid format or as per
+     * requirements.
+     *
+     * @param citiesCSV Comma seperated string of the cities
+     */
     @Throws(java.lang.IllegalArgumentException::class)
     fun fetchWeatherForecastForCities(citiesCSV: String) {
         val cities = citiesCSV.split(",").filter { it.trim().isNotEmpty() }.distinct()

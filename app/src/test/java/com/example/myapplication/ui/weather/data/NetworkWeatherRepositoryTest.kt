@@ -30,6 +30,11 @@ class NetworkWeatherRepositoryTest {
     private val behavior = NetworkBehavior.create()
 
 
+    /**
+     * Mocks the behaviour of the Retrofit. Uses [MockRetrofit] to achieve the same.
+     * A [BehaviorDelegate] is used to mock the API Service used by Retrofit.
+     *
+     */
     @ExperimentalCoroutinesApi
     @Before
     fun createRepository() {

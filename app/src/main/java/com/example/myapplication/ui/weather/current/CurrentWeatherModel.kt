@@ -20,15 +20,15 @@ data class CurrentWeatherModel(
     }
 
     override fun hashCode(): Int {
-        var result = cityId.hashCode()
-        result = 31 * result + (cityName?.hashCode() ?: 0)
-        result = 31 * result + (maxMinTemp?.hashCode() ?: 0)
-        result = 31 * result + (temp?.hashCode() ?: 0)
-        result = 31 * result + (windSpeed?.hashCode() ?: 0)
-        result = 31 * result + (description?.hashCode() ?: 0)
-        return result
+        return cityId.hashCode()
     }
 
+    /**
+     * Compare the contents of the two [CurrentWeatherModel] objects
+     *
+     * @param newItem
+     * @return true if contents are same, false otherwise.
+     */
     fun areContentsTheSame(newItem: CurrentWeatherModel): Boolean {
         return cityName == newItem.cityName &&
                 maxMinTemp == newItem.maxMinTemp &&

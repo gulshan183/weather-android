@@ -10,6 +10,13 @@ import dagger.Module
  */
 @Module
 abstract class TestRepositoryModule {
+
+    /**
+     * Provides mocked [WeatherRepository]. 
+     *
+     * @param repository
+     * @return [WeatherRepository]
+     */
     @Binds
     abstract fun provideRepository(repository: FakeWeatherRepository): WeatherRepository
 }

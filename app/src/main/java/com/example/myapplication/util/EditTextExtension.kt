@@ -11,6 +11,12 @@ import android.widget.EditText
  * Created by Gulshan Ahluwalia on 2020-02-05.
  */
 
+/**
+ * Config the [EditText] to handle the search IME action.
+ * Once the user click search button on soft keyboard the func will be executed.
+ *
+ * @param func
+ */
 fun EditText.onSubmit(func: () -> Unit) {
 
     setOnEditorActionListener { _, actionId, _ ->
@@ -22,6 +28,11 @@ fun EditText.onSubmit(func: () -> Unit) {
     }
 }
 
+/**
+ * Hide soft keyboard on a particular action
+ *
+ * @param view
+ */
 fun hideKeyboardFrom(view: View) {
     val imm: InputMethodManager =
         view.context.getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager

@@ -12,6 +12,7 @@ import com.example.myapplication.ui.weather.data.WeatherRepository
 import com.example.myapplication.ui.weather.data.model.ListElement
 import com.example.myapplication.ui.weather.data.model.WeatherForecastResponseModel
 import com.example.myapplication.util.*
+import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -41,6 +42,11 @@ class ForecastWeatherViewModel @Inject constructor(
     val isLoading: LiveData<Boolean>
         get() = _loadingState
 
+    /**
+     * Fetch the weather forecast for 5 days with 3 hours interval. Data got fetched using Coroutines.
+     *
+     * @param location for which to get weather forecast
+     */
     fun fetchWeatherForecast(location: Location) {
         launchDataLoad {
             val list = transformModel(
@@ -57,6 +63,12 @@ class ForecastWeatherViewModel @Inject constructor(
         }
     }
 
+    /**
+     * Transforms the response from API to a model which will be used to update UI
+     *
+     * @param weatherForecastResponse
+     * @return
+     */
     private fun transformModel(weatherForecastResponse: WeatherForecastResponseModel?): List<ForecastWeatherModel> {
         _city.value = weatherForecastResponse?.city?.name
         val map = groupSameDays(weatherForecastResponse?.list)
@@ -92,6 +104,14 @@ class ForecastWeatherViewModel @Inject constructor(
         } ?: emptyMap()
     }
 
+    /**
+     * Handles the [CoroutineScope] with respect to the lifecycle of [AndroidViewModel].
+     * Also maintains the loading state of UI. Which would otherwise to become boilerplate code.
+     *
+     * @param loadingLiveData
+     * @param block
+     * @return [Job] which is cancellable
+     */
     private fun launchDataLoad(
         loadingLiveData: MutableLiveData<Boolean> = _loadingState,
         block: suspend () -> Unit

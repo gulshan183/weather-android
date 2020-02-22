@@ -20,6 +20,11 @@ class NetworkWeatherRepository
         retrofit.create(WeatherNetworkService::class.java)
     }
 
+    /**
+     * Fetch the weather for the city.
+     * @throws [RepositoryException.CurrentWeatherException] for any response error from API.
+     * @param cityName
+     */
     @Throws(RepositoryException.CurrentWeatherException::class)
     override suspend fun fetchCurrentWeather(cityName: String): CurrentWeatherResponseModel? {
         return launchAPI({
@@ -27,6 +32,12 @@ class NetworkWeatherRepository
         }, { e -> RepositoryException.CurrentWeatherException(e.errorResponseModel) })
     }
 
+    /**
+     * Fetch the weather for the specified location.
+     * @throws [RepositoryException.WeatherForecastException] for any response error from API.
+     * @param latitude
+     * @param longitude
+     */
     @Throws(RepositoryException.WeatherForecastException::class)
     override suspend fun fetchWeatherForecast(
         latitude: Double,
@@ -34,10 +45,16 @@ class NetworkWeatherRepository
     ): WeatherForecastResponseModel? {
         return launchAPI({
             return@launchAPI retrofitService.getForecastWeather(latitude, longitude)
-        }, { e -> RepositoryException.CurrentWeatherException(e.errorResponseModel) })
+        }, { e -> RepositoryException.WeatherForecastException(e.errorResponseModel) })
     }
 
 
+    /**
+     * Genric method to accomodate all kind network requests called.
+     *
+     * @param apiCall
+     * @param exception
+     */
     private suspend fun <T : Any> launchAPI(
         apiCall: () -> Call<T>,
         exception: (e: NetworkException) -> RepositoryException
@@ -49,6 +66,7 @@ class NetworkWeatherRepository
         }
     }
 
+    // Exceptions related to data requests.
     sealed class RepositoryException(val errorResponseModel: ErrorResponseModel) :
         Throwable(errorResponseModel.message) {
         class CurrentWeatherException(errorResponseModel: ErrorResponseModel) :

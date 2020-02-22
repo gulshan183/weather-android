@@ -9,11 +9,12 @@ import com.example.myapplication.di.DaggerAppComponent
  */
 open class MyApplication : Application() {
 
+    // Dagger main component, with lifecycle scope of application
     val appComponent: AppComponent by lazy {
         initializeComponent()
     }
 
-
+    //Initializing AppComponent
     open fun initializeComponent(): AppComponent {
         return DaggerAppComponent.builder().application(this).build()
     }

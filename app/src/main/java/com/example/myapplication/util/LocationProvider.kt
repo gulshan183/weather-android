@@ -26,6 +26,14 @@ import com.google.android.gms.tasks.Task
 const val GOOGLE_SERVICE_RESOLVE_REQUEST = 101
 const val LOCATION_SETTING_REQUEST = 111
 
+/**
+ * Handle Location service to provide the current location.
+ * The location service will be finished once the calling component lifecycle destroys.
+ * This is also handles the runtime settings required to start the location service.
+ *
+ * @property context required to handle system settings
+ * @property lifecycle required to bind this service with a [Lifecycle]
+ */
 class LocationProvider(
     private val context: Activity,
     private val lifecycle: Lifecycle
@@ -34,6 +42,11 @@ class LocationProvider(
 
     private var locationCallback: LocationUpdateCallback? = null
 
+    /**
+     * Check if play services are available, otherwise show errors
+     * 
+     * @return true, if play services are available, false otherwise
+     */
     private fun checkPlayServices(): Boolean {
         val resultCode = GoogleApiAvailability.getInstance().isGooglePlayServicesAvailable(context)
         if (resultCode != ConnectionResult.SUCCESS) {
@@ -53,6 +66,7 @@ class LocationProvider(
         return true
     }
 
+    //Create location request with set of parameters
     private fun getLocationRequest(): LocationRequest {
         return LocationRequest().apply {
             priority =
@@ -65,6 +79,11 @@ class LocationProvider(
     }
 
 
+    /**
+     * Locations settings tasks to help with turning on the location on device.
+     * 
+     * @param locationRequest
+     */
     private fun getLocationSettingsTask(locationRequest: LocationRequest): Task<LocationSettingsResponse> {
         val locationRequestBuilder = LocationSettingsRequest.Builder()
         locationRequestBuilder.addLocationRequest(locationRequest)
@@ -74,6 +93,11 @@ class LocationProvider(
 
     }
 
+    /**
+     * Start listening to location updates, if the state of lifecycle is at least started.
+     *
+     * @param locationUpdateCallback user to provide location updates.
+     */
     fun requestLocationUpdates(locationUpdateCallback: LocationUpdateCallback) {
         if (lifecycle.currentState.isAtLeast(Lifecycle.State.CREATED)) {
             locationCallback = locationUpdateCallback
@@ -84,12 +108,18 @@ class LocationProvider(
     }
 
 
+    /**
+     * Get quick last known location, before starting the service.
+     */
     private fun getLastLocation() {
         val fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(context)
         fusedLocationProviderClient.lastLocation.addOnSuccessListener(this)
     }
 
-
+    /**
+     * Send location updates to the listeners
+     * @param location
+     */
     private fun publishLocation(location: Location?) {
         if (location != null) {
             locationCallback?.onLocationUpdated(location)
@@ -97,6 +127,9 @@ class LocationProvider(
     }
 
 
+    /**
+     * Stop the location updates. It will be called automatically if the lifecycle is destroyed.
+     */
     @OnLifecycleEvent(Lifecycle.Event.ON_DESTROY)
     fun stopLocationUpdates() {
         locationCallback = null

@@ -40,6 +40,9 @@ class MainActivityTest {
     }
 
 
+    /**
+     * Test to see that toolbar is being visible as per requirements
+     */
     @Test
     fun toolbar_nameVisible() {
         val scenario = ActivityScenario.launch<MainActivity>(MainActivity::class.java)

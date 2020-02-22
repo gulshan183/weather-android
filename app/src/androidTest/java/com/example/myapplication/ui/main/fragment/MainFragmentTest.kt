@@ -41,6 +41,10 @@ class MainFragmentTest {
     }
 
 
+    /**
+     * Assert that navigation items are displaying
+     *
+     */
     @Test
     fun mainMenu_visible() {
         val scenario = launchFragmentInContainer<MainFragment>()

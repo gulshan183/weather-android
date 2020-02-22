@@ -22,6 +22,11 @@ import org.junit.runner.RunWith
 /**
  * Created by Gulshan Ahluwalia on 2020-02-07.
  */
+
+/**
+ * Test the navigation of complete app, along with different scenarios
+ *
+ */
 @RunWith(AndroidJUnit4::class)
 @LargeTest
 class AppNavigationTest {

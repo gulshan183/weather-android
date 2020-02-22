@@ -47,6 +47,7 @@ class CurrentWeatherFragment : Fragment() {
     }
 
     private fun initView() {
+        // Configuring the search EditText to search when users enter on the soft keyboard
         mBinding.etSearch.onSubmit {
             try {
                 viewModel.fetchWeatherForecastForCities(mBinding.etSearch.text.toString())
@@ -74,6 +75,7 @@ class CurrentWeatherFragment : Fragment() {
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
+        //Dagger injection init
         requireActivity().getAppComponent()?.inject(this)
     }
 

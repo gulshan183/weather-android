@@ -36,9 +36,13 @@ class DaysForecastAdapter : RecyclerView.Adapter<DaysForecastAdapter.ViewHolder>
 
     inner class ViewHolder(private val binding: DaysForecastListItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
+
+        // Creating nested recycler view for showing the weather forecast of particular date
         fun bind(item: ForecastWeatherModel) {
             binding.hoursList.apply {
+                //List will be always of fixed size
                 setHasFixedSize(true)
+
                 layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
                 adapter = HoursForecastAdapter(item.weatherHours ?: emptyList())
 
