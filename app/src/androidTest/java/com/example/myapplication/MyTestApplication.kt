@@ -13,7 +13,7 @@ import com.example.myapplication.di.DaggerTestAppComponent
  */
 class MyTestApplication : MyApplication() {
     /*
-    Intializing TestAppComponent for dependency injection
+    Initializing TestAppComponent for dependency injection
      */
     override fun initializeComponent(): AppComponent {
         return DaggerTestAppComponent.builder().application(this).build()

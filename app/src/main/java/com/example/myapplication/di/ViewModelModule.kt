@@ -31,7 +31,7 @@ abstract class ViewModelModule {
      * Creating [Map.Entry] for [ForecastWeatherViewModel] to be used in multiple
      * binding for grouping similar dependencies
      *
-     * @param currentWeatherViewModel
+     * @param forecastWeatherViewModel
      * @return [ViewModel]
      */
     @Binds

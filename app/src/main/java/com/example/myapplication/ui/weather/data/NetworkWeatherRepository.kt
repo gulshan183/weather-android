@@ -50,7 +50,7 @@ class NetworkWeatherRepository
 
 
     /**
-     * Genric method to accomodate all kind network requests called.
+     * Generic method to accommodate all kind network requests called.
      *
      * @param apiCall
      * @param exception

@@ -174,7 +174,7 @@ class CurrentWeatherViewModel @Inject constructor(
      * @throws [IllegalArgumentException] if the cities are not in the valid format or as per
      * requirements.
      *
-     * @param citiesCSV Comma seperated string of the cities
+     * @param citiesCSV Comma separated string of the cities
      */
     @Throws(java.lang.IllegalArgumentException::class)
     fun fetchWeatherForecastForCities(citiesCSV: String) {
