@@ -12,8 +12,6 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.myapplication.databinding.CurrentWeatherFragmentBinding
-import com.example.myapplication.ui.weather.data.WeatherRepository
-import com.example.myapplication.util.ViewModelFactory
 import com.example.myapplication.util.getAppComponent
 import com.example.myapplication.util.onSubmit
 import javax.inject.Inject

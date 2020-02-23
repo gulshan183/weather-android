@@ -18,8 +18,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.myapplication.R
 import com.example.myapplication.databinding.ForecastWeatherFragmentBinding
 import com.example.myapplication.ui.util.PermissionAwareFragment
-import com.example.myapplication.ui.weather.current.CurrentWeatherViewModel
-import com.example.myapplication.ui.weather.data.WeatherRepository
 import com.example.myapplication.util.*
 import javax.inject.Inject
 
@@ -50,8 +48,8 @@ class ForecastWeatherFragment : PermissionAwareFragment() {
      * Start to observe location on permission granted.
      */
     override fun onPermissionGranted() {
-        if(mBinding.list.adapter?.itemCount?:0 == 0)
-        observerCurrentLocation()
+        if (mBinding.list.adapter?.itemCount ?: 0 == 0)
+            observerCurrentLocation()
     }
 
     /**

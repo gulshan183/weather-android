@@ -44,7 +44,7 @@ class LocationProvider(
 
     /**
      * Check if play services are available, otherwise show errors
-     * 
+     *
      * @return true, if play services are available, false otherwise
      */
     private fun checkPlayServices(): Boolean {
@@ -81,7 +81,7 @@ class LocationProvider(
 
     /**
      * Locations settings tasks to help with turning on the location on device.
-     * 
+     *
      * @param locationRequest
      */
     private fun getLocationSettingsTask(locationRequest: LocationRequest): Task<LocationSettingsResponse> {

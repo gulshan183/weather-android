@@ -25,7 +25,7 @@ abstract class ViewModelModule {
     @Binds
     @IntoMap
     @ViewModelKey(CurrentWeatherViewModel::class)
-    abstract fun bindCurrentWeatherViewModel(currentWeatherViewModel: CurrentWeatherViewModel):ViewModel
+    abstract fun bindCurrentWeatherViewModel(currentWeatherViewModel: CurrentWeatherViewModel): ViewModel
 
     /**
      * Creating [Map.Entry] for [ForecastWeatherViewModel] to be used in multiple
@@ -37,8 +37,8 @@ abstract class ViewModelModule {
     @Binds
     @IntoMap
     @ViewModelKey(ForecastWeatherViewModel::class)
-    abstract fun bindForecastWeatherViewModel(forecastWeatherViewModel: ForecastWeatherViewModel):ViewModel
+    abstract fun bindForecastWeatherViewModel(forecastWeatherViewModel: ForecastWeatherViewModel): ViewModel
 
     @Binds
-    abstract fun bindViewModelFactory(viewModelFactory: ViewModelFactory):ViewModelProvider.Factory
+    abstract fun bindViewModelFactory(viewModelFactory: ViewModelFactory): ViewModelProvider.Factory
 }

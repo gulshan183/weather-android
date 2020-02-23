@@ -24,8 +24,7 @@ class TextUtilsTest {
     }
 
     @Test
-    fun getMinMaxDegreeFormat(){
-        Truth.assertThat(getMinMaxDegreeFormat("2","1")).
-            isEqualTo("2\u00B0 / 1\u00B0")
+    fun getMinMaxDegreeFormat() {
+        Truth.assertThat(getMinMaxDegreeFormat("2", "1")).isEqualTo("2\u00B0 / 1\u00B0")
     }
 }

@@ -12,7 +12,7 @@ import dagger.Module
 abstract class TestRepositoryModule {
 
     /**
-     * Provides mocked [WeatherRepository]. 
+     * Provides mocked [WeatherRepository].
      *
      * @param repository
      * @return [WeatherRepository]

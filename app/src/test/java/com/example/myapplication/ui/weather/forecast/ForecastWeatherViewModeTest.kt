@@ -9,8 +9,8 @@ import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.example.myapplication.R
 import com.example.myapplication.constant.APIResponseState
 import com.example.myapplication.ui.weather.data.FakeWeatherRepository
-import com.google.common.truth.Truth
 import com.example.myapplication.util.MainCoroutineRule
+import com.google.common.truth.Truth
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import org.junit.Before
 import org.junit.Rule
@@ -37,6 +37,10 @@ class ForecastWeatherViewModeTest {
     @get:Rule
     var instantExecutorRule = InstantTaskExecutorRule()
 
+    /**
+     * Init [ForecastWeatherViewModel] with [Application] and [FakeWeatherRepository]
+     *
+     */
     @Before
     fun setupViewModel() {
         context = ApplicationProvider.getApplicationContext()

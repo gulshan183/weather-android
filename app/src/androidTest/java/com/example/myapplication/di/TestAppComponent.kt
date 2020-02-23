@@ -14,12 +14,13 @@ import javax.inject.Singleton
  * will be injected to the ViewModels for UI Tests only
  */
 @Singleton
-@Component(modules = [NetworkModule::class, TestRepositoryModule::class,ViewModelModule::class])
-interface TestAppComponent : AppComponent{
+@Component(modules = [NetworkModule::class, TestRepositoryModule::class, ViewModelModule::class])
+interface TestAppComponent : AppComponent {
     @Component.Builder
     interface Builder {
         @BindsInstance
-        fun application(application: Application):Builder
-        fun build():AppComponent
+        fun application(application: Application): Builder
+
+        fun build(): AppComponent
     }
 }

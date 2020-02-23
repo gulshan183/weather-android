@@ -22,6 +22,15 @@ import javax.inject.Inject
  */
 class FakeWeatherRepository @Inject constructor() : WeatherRepository {
     var apiResponseState = SUCCESS
+
+    /**
+     * Mocking the response of forecast weather API.
+     * set [apiResponseState] before calling this method to have desired response.
+     *
+     * @param latitude
+     * @param longitude
+     * @return [WeatherForecastResponseModel]
+     */
     override suspend fun fetchWeatherForecast(
         latitude: Double,
         longitude: Double
@@ -69,6 +78,13 @@ class FakeWeatherRepository @Inject constructor() : WeatherRepository {
         }
     }
 
+    /**
+     * Mocking the response of current weather API.
+     * set [apiResponseState] before calling this method to have desired response.
+     *
+     * @param cityName
+     * @return [CurrentWeatherResponseModel]
+     */
     override suspend fun fetchCurrentWeather(cityName: String): CurrentWeatherResponseModel? {
         when (apiResponseState) {
             SUCCESS -> {

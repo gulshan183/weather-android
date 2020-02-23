@@ -13,6 +13,7 @@ import androidx.fragment.app.Fragment
  * It handles when to show runtime permissions and the cases of success or failure.
  */
 private const val REQUEST_PERMISSION = 100
+
 abstract class PermissionAwareFragment : Fragment() {
     abstract fun onPermissionGranted()
     abstract fun onPermissionNotGranted()

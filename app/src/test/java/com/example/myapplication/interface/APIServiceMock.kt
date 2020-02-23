@@ -28,6 +28,14 @@ class APIServiceMock(private val delegate: BehaviorDelegate<WeatherNetworkServic
     var apiResponseState = SUCCESS
 
 
+    /**
+     * Mocking the response of current weather API.
+     * set [apiResponseState] before calling this method to have desired response.
+     *
+     *
+     * @param cityName
+     * @return [Call]
+     */
     override fun getCurrentWeather(cityName: String): Call<CurrentWeatherResponseModel> {
         return (when (apiResponseState) {
             SUCCESS -> {
@@ -67,6 +75,14 @@ class APIServiceMock(private val delegate: BehaviorDelegate<WeatherNetworkServic
 
     }
 
+    /**
+     * Mocking the response of forecast weather API.
+     * set [apiResponseState] before calling this method to have desired response.
+     *
+     * @param lat
+     * @param lon
+     * @return [WeatherForecastResponseModel]
+     */
     override fun getForecastWeather(lat: Double, lon: Double): Call<WeatherForecastResponseModel> {
         return (when (apiResponseState) {
             SUCCESS -> {
