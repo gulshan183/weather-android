@@ -27,7 +27,6 @@ class NetworkWeatherRepositoryTest {
     private lateinit var mockRetrofit: Retrofit
     private lateinit var repository: NetworkWeatherRepository
     private lateinit var apiServiceMock: APIServiceMock
-    private val behavior = NetworkBehavior.create()
 
 
     /**
@@ -41,7 +40,7 @@ class NetworkWeatherRepositoryTest {
         val retrofit = Retrofit.Builder()
             .baseUrl("http://example.com").build()
         val mockRetrofit2 = MockRetrofit.Builder(retrofit)
-            .networkBehavior(behavior).build()
+            .networkBehavior(NetworkBehavior.create()).build()
 
         val delegate: BehaviorDelegate<WeatherNetworkService?> =
             mockRetrofit2.create(WeatherNetworkService::class.java)

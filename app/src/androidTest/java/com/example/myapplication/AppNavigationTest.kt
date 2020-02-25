@@ -32,10 +32,11 @@ import org.junit.runner.RunWith
 class AppNavigationTest {
 
 
-    private val dataBindingIdlingResource = DataBindingIdlingResource()
+    private lateinit var dataBindingIdlingResource:DataBindingIdlingResource
 
     @Before
     fun registerIdlingResource() {
+        dataBindingIdlingResource = DataBindingIdlingResource()
         IdlingRegistry.getInstance().register(EspressoIdlingResource.countingIdlingResource)
         IdlingRegistry.getInstance().register(dataBindingIdlingResource)
     }

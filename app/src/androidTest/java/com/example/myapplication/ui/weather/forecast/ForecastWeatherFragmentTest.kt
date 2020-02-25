@@ -26,11 +26,9 @@ import org.junit.runner.RunWith
  */
 @RunWith(AndroidJUnit4::class)
 class ForecastWeatherFragmentTest {
-    private val appContext: Context by lazy {
-        InstrumentationRegistry.getInstrumentation().targetContext
-    }
+    private lateinit var appContext: Context
 
-    private val dataBindingIdlingResource = DataBindingIdlingResource()
+    private lateinit var dataBindingIdlingResource : DataBindingIdlingResource
 
     @get:Rule
     var permissionRule: GrantPermissionRule =
@@ -41,6 +39,8 @@ class ForecastWeatherFragmentTest {
 
     @Before
     fun registerIdlingResource() {
+        appContext = InstrumentationRegistry.getInstrumentation().targetContext
+        dataBindingIdlingResource = DataBindingIdlingResource()
         IdlingRegistry.getInstance().register(dataBindingIdlingResource)
     }
 
